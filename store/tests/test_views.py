@@ -1,4 +1,4 @@
-from unittest import skip
+# from unittest import skip
 from django.test import TestCase, Client, RequestFactory
 from django.urls import reverse
 from django.http import HttpRequest
