@@ -13,6 +13,7 @@ class TestCategoriesModel(TestCase):
         """Test Category model data insertion/types/field attributes."""
         data = self.data1
         self.assertTrue(isinstance(data, Category))
+        self.assertEqual(str(data), "django")
 
     def test_category_model_name(self):
         """Test Category model default name."""
