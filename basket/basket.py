@@ -10,4 +10,9 @@ class Basket:
             basket = self.session["session_key"] = {}
         self.basket = basket
 
-
+    def add(self, product):
+        """Add and update the user's basket session data."""
+        product_id = product.id
+        if product_id not in self.basket:
+            self.basket[product_id] = {"price": int(product.price)}
+        self.session.modified = True
