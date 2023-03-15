@@ -18,7 +18,7 @@ class Basket:
         product_id = product.id
         if product_id not in self.basket:
             self.basket[product_id] = {"price": str(product.price), "qty": int(product_qty)}
-        self.session.modified = True
+        self.save_session()
 
     def __iter__(self):
         """Collect the product_id in the session data to query the database and return products."""
@@ -39,3 +39,14 @@ class Basket:
     def get_subtotal(self):
         """Get the total price of items in the basket."""
         return sum(Decimal(item["price"]) * item["qty"] for item in self.basket.values())
+
+    def delete(self, product):
+        """Delete item from session data by its ID."""
+        product_id = str(product)
+        if product_id in self.basket:
+            del self.basket[product_id]
+            self.save_session()
+
+    def save_session(self):
+        """Save the modified session data."""
+        self.session.modified = True
