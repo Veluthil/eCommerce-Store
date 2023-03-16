@@ -28,7 +28,7 @@
             <div class="row p-3">
               <div class="col-12">
                 <label for="select">Qty</label>
-                <select id="select">
+                <select id="select{{product.id}}">
                   <option selected>
                     {{item.qty}}
                   </option>
@@ -37,7 +37,7 @@
                   <option value="">3</option>
                   <option value="">4</option>
                 </select>
-                <button type="button" id="add-button" value="{{product.id}}"
+                <button type="button" id="update-button" data-index="{{product.id}}"
                   class="btn btn-outline-secondary btn-sm update-button">
                   Update
                 </button>
@@ -60,6 +60,8 @@
 </main>
 
 <script>
+<!--Delete item from the basket-->
+
     $(document).on('click', '.delete-button', function (e) {
         e.preventDefault()
         var prodid = $(this).data('index');
@@ -77,6 +79,29 @@
             error: function (xhr, errmsg, err) {}
         });
     })
+
+
+<!--Update item in the basket-->
+
+     $(document).on('click', '.update-button', function (e) {
+        e.preventDefault()
+        var prodid = $(this).data('index');
+        $.ajax({
+            type: 'POST',
+            url: '{% url "basket:basket_update" %}',
+            data: {
+                productid: $(this).data('index'),
+                productqty: $('#select'+ prodid +' option:selected').text(),
+                csrfmiddlewaretoken: "{{csrf_token}}",
+                action: 'post'
+            },
+            success: function (json) {
+
+            },
+            error: function (xhr, errmsg, err) {}
+        });
+    })
+
 </script>
 
 {% endblock %}
