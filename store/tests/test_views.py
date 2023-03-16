@@ -1,18 +1,26 @@
-# from unittest import skip
+from importlib import import_module
+from unittest import skip
+
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.http import HttpRequest
-from django.test import Client, RequestFactory, TestCase
+from django.test import Client, TestCase
 from django.urls import reverse
 
 from store.models import Category, Product
 from store.views import product_all
 
 
+@skip("skipping demo")
+class TestSkip(TestCase):
+    def example_of_test_skipping(self):
+        pass
+
+
 class TestViewResponses(TestCase):
 
     def setUp(self) -> None:
         self.c = Client()
-        self.factory = RequestFactory()
         Category.objects.create(name="django", slug="django")
         User.objects.create(username="admin")
         Product.objects.create(category_id=1, title="Django 1", created_by_id=1,
@@ -40,14 +48,8 @@ class TestViewResponses(TestCase):
     def test_homepage_html(self):
         """Test homepage response status."""
         request = HttpRequest()
-        response = product_all(request)
-        html = response.content.decode("utf8")
-        self.assertIn("<title>DokushouVernissage</title>", html)
-        self.assertTrue(html.startswith("\n<!DOCTYPE html>\n"))
-        self.assertEqual(response.status_code, 200)
-
-    def test_view_function(self):
-        request = self.factory.get("/django-1")
+        engine = import_module(settings.SESSION_ENGINE)
+        request.session = engine.SessionStore()
         response = product_all(request)
         html = response.content.decode("utf8")
         self.assertIn("<title>DokushouVernissage</title>", html)
