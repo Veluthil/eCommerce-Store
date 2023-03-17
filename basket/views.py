@@ -7,7 +7,7 @@ from store.models import Product
 
 def basket_summary(request):
     basket = Basket(request)
-    return render(request, "store/basket/summary.html", {"basket": basket})
+    return render(request, "basket/summary.html", {"basket": basket})
 
 
 def basket_add(request):
