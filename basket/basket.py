@@ -30,8 +30,18 @@ class Basket:
         return sum(item["qty"] for item in self.basket.values())
 
     def get_subtotal(self):
-        """Get the total price of items in the basket."""
+        """Get the total price of the items in the basket."""
         return sum(Decimal(item["price"]) * item["qty"] for item in self.basket.values())
+
+    def get_total_price(self):
+        """Get the total price of the items in the basket including the shipping payment."""
+        subtotal = sum(Decimal(item['price']) * item['qty'] for item in self.basket.values())
+        if subtotal == 0:
+            shipping = Decimal(0.00)
+        else:
+            shipping = Decimal(11.50)
+        total = subtotal + Decimal(shipping)
+        return total
 
     def add(self, product, product_qty):
         """Add and update the user's basket session data."""
