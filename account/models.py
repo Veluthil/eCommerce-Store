@@ -59,3 +59,13 @@ class UserBase(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.user_name
+
+    def email_user(self, subject, message):
+        # send_mail(
+        #     subject,
+        #     message,
+        #     'l@1.com',
+        #     [self.email],
+        #     fail_silently=False,
+        # )
+        pass
