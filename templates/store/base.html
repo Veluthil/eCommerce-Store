@@ -44,7 +44,7 @@
                         </a>
                         <ul class="dropdown-menu rounded-0 border-0" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="{% url 'store:product_all' %}">All</a></li>
-<!---->
+                            <!---->
                         </ul>
                     </li>
                 </ul>
@@ -62,20 +62,19 @@
                 </button>
 
                 {% if user.is_authenticated %}
-                <a type="button" role="button" href="#"
+                <a type="button" role="button" href="{% url 'account:logout' %}"
                    class="btn btn-outline-secondary border-0 basket-btn">
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
-                             class="bi bi-door-closed" viewBox="0 0 16 16">
-                            <path
-                                    d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z"/>
-                            <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"/>
+                             class="bi bi-door-open" viewBox="0 0 16 16">
+                            <path d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
+                            <path d="M10.828.122A.5.5 0 0 1 11 .5V1h.5A1.5 1.5 0 0 1 13 2.5V15h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117zM11.5 2H11v13h1V2.5a.5.5 0 0 0-.5-.5zM4 1.934V15h6V1.077l-6 .857z"/>
                         </svg>
                     </div>
                     <span class="fs15 fw500">Logout</span>
                 </a>
                 {% else %}
-                <a type="button" role="button" href="#"
+                <a type="button" role="button" href="{% url 'account:login' %}"
                    class="btn btn-outline-secondary border-0 basket-btn">
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
@@ -128,7 +127,6 @@
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         <li><a class="dropdown-item" href="{% url 'store:product_all' %}">All</a></li>
 
-<!--&lt;!&ndash;  -->
 
                     </ul>
                 </div>
