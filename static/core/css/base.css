@@ -23,6 +23,22 @@
     background-color: #E4F1FF;
 }
 
+/* Styling of Bootstrap forms and containers */
+
+.container-fluid {
+       max-width: 100%;
+   }
+
+.account-form input {
+    border: 2px solid #ccc;
+    height: calc(2em + .75rem + 2px);
+}
+
+.account-form input:focus {
+    border-color: #1497ff;
+    box-shadow: none;
+}
+
 
 /* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
