@@ -1,1 +1,24 @@
-dashboard
+{% extends "../../store/base.html" %}
+{% load static %}
+{% block title %}
+Basket Summary
+{% endblock %}
+{% block content %}
+
+<main class="pt-5">
+    <div class="container" style="max-width: 1000px">
+        <div class="col-12">
+            <h1 class="h2">Your Dashboard</h1>
+        </div>
+        <div class="col-12 d-flex justify-content-between">
+            <div>Manage your <b>orders</b> and personal details</div>
+            <div><a href="{% url 'account:edit_details' %}">Change Details</a></div>
+        </div>
+        <hr/>
+    </div>
+    <div class="container" style="max-width: 1000px">
+
+    </div>
+</main>
+
+{% endblock %}
