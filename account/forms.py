@@ -1,9 +1,28 @@
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm
+from django_countries.fields import CountryField
+
 from .models import UserBase
 
 
-class RegistrationForm(forms.ModelForm):
+class UserLoginForm(AuthenticationForm):
+    username = forms.CharField(widget=forms.TextInput(
+        attrs={
+            "class": "form-control mb-3",
+            "placeholder": "Username",
+            "id": "login-username",
+        }
+    ))
+    password = forms.CharField(widget=forms.PasswordInput(
+        attrs={
+            "class": "form-control",
+            "placeholder": "Password",
+            "id": "login-password",
+        }
+    ))
 
+
+class RegistrationForm(forms.ModelForm):
     user_name = forms.CharField(label="Enter username", min_length=4, max_length=30, help_text="Required")
     email = forms.EmailField(max_length=50, help_text="Required", error_messages={
         "Required": "You have to add your email address."
@@ -36,11 +55,107 @@ class RegistrationForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['user_name'].widget.attrs.update(
-            {'class': 'form-control mb-3', 'placeholder': 'Username'})
-        self.fields['email'].widget.attrs.update(
-            {'class': 'form-control mb-3', 'placeholder': 'E-mail', 'name': 'email', 'id': 'id_email'})
-        self.fields['password'].widget.attrs.update(
-            {'class': 'form-control mb-3', 'placeholder': 'Password'})
-        self.fields['password2'].widget.attrs.update(
-            {'class': 'form-control', 'placeholder': 'Repeat Password'})
+        self.fields["user_name"].widget.attrs.update(
+            {"class": "form-control mb-3", "placeholder": "Username"})
+        self.fields["email"].widget.attrs.update(
+            {"class": "form-control mb-3", "placeholder": "E-mail", "name": "email", "id": "id_email"})
+        self.fields["password"].widget.attrs.update(
+            {"class": "form-control mb-3", "placeholder": "Password"})
+        self.fields["password2"].widget.attrs.update(
+            {"class": "form-control", "placeholder": "Repeat Password"})
+
+
+class UserEditForm(forms.ModelForm):
+    email = forms.EmailField(
+        label="Account email (can not be changed)", max_length=200, widget=forms.TextInput(
+            attrs={
+                "class": "form-control mb-3",
+                "placeholder": "Email",
+                "id": "form-email",
+                "readonly": "readonly"
+            }
+        ))
+    user_name = forms.CharField(
+        label="Username (can not be changed)", min_length=4, max_length=50, widget=forms.TextInput(
+            attrs={
+                "class": "form-control mb-3",
+                "placeholder": "Username",
+                "id": "form-username",
+                "readonly": "readonly"
+            }
+        ))
+    first_name = forms.CharField(
+        label="First name", min_length=2, max_length=50, widget=forms.TextInput(
+            attrs={
+                "class": "form-control mb-3",
+                "placeholder": "Firstname",
+                "id": "form-firstname"
+            }
+        ))
+    surname = forms.CharField(
+        label="Surname", min_length=2, max_length=50, widget=forms.TextInput(
+            attrs={
+                "class": "form-control mb-3",
+                "placeholder": "Surname",
+                "id": "form-surname"
+            }
+        ))
+    about = forms.CharField(
+        label="About", min_length=4, max_length=500, widget=forms.TextInput(
+            attrs={
+                "class": "form-control mb-3",
+                "placeholder": "About",
+                "id": "form-about"
+            }
+        ))
+    country = CountryField()
+    phone_number = forms.CharField(
+        label="Phone Number", min_length=4, max_length=15, widget=forms.TextInput(
+            attrs={
+                "class": "form-control mb-3",
+                "placeholder": "phone-number",
+                "id": "form-phone-number"
+            }
+        ))
+    postcode = forms.CharField(
+        label="Postcode", min_length=4, max_length=10, widget=forms.TextInput(
+            attrs={
+                "class": "form-control mb-3",
+                "placeholder": "Postcode",
+                "id": "form-postcode"
+            }
+        ))
+    address_1 = forms.CharField(
+        label="Address 1", min_length=4, max_length=100, widget=forms.TextInput(
+            attrs={
+                "class": "form-control mb-3",
+                "placeholder": "Address-1",
+                "id": "form-address-1"
+            }
+        ))
+    address_2 = forms.CharField(
+        label="Address 2", min_length=0, max_length=100, widget=forms.TextInput(
+            attrs={
+                "class": "form-control mb-3",
+                "placeholder": "Address-2",
+                "id": "form-address-2"
+            }
+        ))
+    city = forms.CharField(
+        label="City", min_length=2, max_length=50, widget=forms.TextInput(
+            attrs={
+                "class": "form-control mb-3",
+                "placeholder": "City",
+                "id": "form-city"
+            }
+        ))
+
+    class Meta:
+        model = UserBase
+        fields = ("email", "user_name", "first_name", "surname", "about", "country", "phone_number", "postcode",
+                  "address_1", "address_2", "city",)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["user_name"].required = True
+        self.fields["email"].required = True
