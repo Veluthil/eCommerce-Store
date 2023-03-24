@@ -9,7 +9,7 @@ class UserLoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(
         attrs={
             "class": "form-control mb-3",
-            "placeholder": "Username",
+            "placeholder": "Email",
             "id": "login-username",
         }
     ))
