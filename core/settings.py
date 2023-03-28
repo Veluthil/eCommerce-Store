@@ -1,5 +1,7 @@
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,6 +32,7 @@ INSTALLED_APPS = [
     'basket',
     'account',
     'payment',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -137,3 +140,13 @@ EMAIL_USE_TLS = False
 EMAIL_USE_SSL = False
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
+
+# Basket session ID
+BASKET_SESSION_ID = 'basket'
+
+# Keys
+load_dotenv("D:/Programming/PythonEnV/.env.txt")
+SECRET_KEY_STRIPE = os.getenv("SECRET_KEY_STRIPE_ECOMMERCE")
+PUBLIC_KEY_STRIPE = os.getenv("PUBLIC_KEY_STRIPE_ECOMMERCE")
+# Stripe payment
+STRIPE_ENDPOINT_SECRET = os.getenv("STRIPE_ENDPOINT_SECRET")
