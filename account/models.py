@@ -1,3 +1,4 @@
+from django.core.mail import send_mail
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django_countries.fields import CountryField
@@ -61,11 +62,10 @@ class UserBase(AbstractBaseUser, PermissionsMixin):
         return self.user_name
 
     def email_user(self, subject, message):
-        # send_mail(
-        #     subject,
-        #     message,
-        #     'l@1.com',
-        #     [self.email],
-        #     fail_silently=False,
-        # )
-        pass
+        send_mail(
+            subject,
+            message,
+            'dokushouvernissage@support.com',
+            [self.email],
+            fail_silently=False,
+        )
