@@ -2,11 +2,11 @@ from importlib import import_module
 from unittest import skip
 
 from django.conf import settings
-from django.contrib.auth.models import User
 from django.http import HttpRequest
 from django.test import Client, TestCase
 from django.urls import reverse
 
+from account.models import UserBase
 from store.models import Category, Product
 from store.views import product_all
 
@@ -22,7 +22,7 @@ class TestViewResponses(TestCase):
     def setUp(self) -> None:
         self.c = Client()
         Category.objects.create(name="django", slug="django")
-        User.objects.create(username="admin")
+        UserBase.objects.create(email="admin@admin.com")
         Product.objects.create(category_id=1, title="Django 1", created_by_id=1,
                                slug="django-1", price="99.99", image="django-1")
 
