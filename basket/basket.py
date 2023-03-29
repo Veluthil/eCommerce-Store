@@ -46,7 +46,7 @@ class Basket:
         return total
 
     def add(self, product, product_qty):
-        """Add and update the user's basket session data."""
+        """Add and update the dashboard's basket session data."""
         product_id = str(product.id)
         if product_id in self.basket:
             self.basket[product_id]["qty"] = product_qty
