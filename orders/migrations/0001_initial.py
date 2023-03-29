@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
                 ('total_paid', models.DecimalField(decimal_places=2, max_digits=5)),
                 ('order_key', models.CharField(max_length=200)),
                 ('billing_status', models.BooleanField(default=False)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='order_user', to=settings.AUTH_USER_MODEL)),
+                ('dashboard', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='order_user', to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'ordering': ('-created',),
