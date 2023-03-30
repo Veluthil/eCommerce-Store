@@ -5,9 +5,9 @@ Log in
 
 {% block sub_content %}
 
-<form class="account-form p-4 rounded" action="{% url 'account:login' %}" method="post">
+<form class="account-form" action="{% url 'account:login' %}" method="post">
     {% csrf_token %}
-    <h3 class="mb-4">Sign In</h3>
+    <h3 class="mb-4 fw-bold">Sign In</h3>
     {% if form.errors %}
     <div class="alert alert-primary" role="alert">
         Error: Username or Password not correct!
@@ -18,20 +18,14 @@ Log in
     <label class="form-label">{{ form.password.label}}</label>
     {{ form.password}}
     <div class="d-grid gap-2">
-        <input type="hidden" name="next" value="{{ next }}">
-        <button class="btn btn-primary py-2 mb-4 mt-5 fw-bold" type="submit" value="Log-in">
-            Sign in
-        </button>
-    </div>
-    <p class="text-center pb-3">
-        <a href="#">Create an account</a>
-    </p>
+    <input type="hidden" name="next" value="{{ next }}">
+    <button class="btn btn-primary py-2 mb-4 mt-5 fw-bold" type="submit" value="Log-in">Sign in
+    </button>
+  </div>
+  <div class="flex-column justify-content-center mx-auto pb-3">
+    <div class="text-center"><a href="{% url 'account:register' %}">Create an Account</a></div>
+    <div class="text-center"><a href="{% url 'account:pwdreset' %}">Forgotten Password?</a></div>
+  </div>
 </form>
-<p class="small text-center pt-4">
-    {% comment %} <a href="#">Forgotten Password?</a> {% endcomment %}
-</p>
-<p class="small text-center">
-    {% comment %} <a href="#">Help Center?</a> {% endcomment %}
-</p>
 
 {% endblock %}

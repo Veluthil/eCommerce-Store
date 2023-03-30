@@ -1,9 +1,8 @@
 {% extends "../../base.html" %}
 {% block title %}
-Basket Summary
+Dashboard
 {% endblock %}
 {% block content %}
-
 
 <div class="container">
     <div class="col-12">
@@ -15,7 +14,7 @@ Basket Summary
     </div>
     <hr/>
 </div>
-<div class="container" style="max-width: 1000px">
+<div class="container">
     {% for order in orders %}
     <div class="row g-3">
         <div class="col-12 bg-light p-3 d-flex justify-content-between">

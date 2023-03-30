@@ -1,31 +1,19 @@
-{% extends "../../base.html" %}
+{% extends "../sub_base.html" %}
 {% block title %}
-Success, password changed
+Success, password reset
 {% endblock %}
 {% block content %}
 
-<div class="container-fluid">
-    <div class="row no-gutter">
-        <div class="col-md-12">
-            <div class="login d-flex align-items-center py-5">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 col-lg-6  mx-auto">
-                            <div class="p-4">
-                                {% if 'email' in request.get_full_path %}
-                                <h3 class="mb-4">Password Reset Success</h3>
-                                <p>Check your email for instructions</p>
-                                {% endif%}
-                                {% if 'complete' in request.get_full_path %}
-                                <h3 class="mb-4">Password Reset Success</h3>
-                                <a href="{% url 'account:login' %}">Login</a>
-                                {% endif%}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="container">
+    <div>
+        {% if 'email' in request.get_full_path %}
+        <h3 class="mb-4 fw-bold">Password Reset</h3>
+        <p>You can now check your email for further instructions.</p>
+        {% endif%}
+        {% if 'complete' in request.get_full_path %}
+        <h3 class="mb-4 fw-bold">Password Reset Successfully</h3>
+        <a href="{% url 'account:login' %}">You can log in now.</a>
+        {% endif%}
     </div>
 </div>
 
