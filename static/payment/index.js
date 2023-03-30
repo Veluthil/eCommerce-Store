@@ -1,4 +1,4 @@
-var stripe = Stripe("INSERT YOUR STRIPE PUBLIC KEY HERE");
+var stripe = Stripe(PUBLISHABLE_KEY_STRIPE);
 
 var elem = document.getElementById('submit');
 clientsecret = elem.getAttribute('data-secret');
