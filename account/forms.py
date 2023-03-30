@@ -23,12 +23,12 @@ class UserLoginForm(AuthenticationForm):
 
 
 class RegistrationForm(forms.ModelForm):
-    user_name = forms.CharField(label="Enter username", min_length=4, max_length=30, help_text="Required")
-    email = forms.EmailField(max_length=50, help_text="Required", error_messages={
+    user_name = forms.CharField(label="Enter Username ", min_length=4, max_length=30, help_text="Required")
+    email = forms.EmailField(label="Email ", max_length=50, help_text="Required", error_messages={
         "Required": "You have to add your email address."
     })
-    password = forms.CharField(label="Password", widget=forms.PasswordInput)
-    password2 = forms.CharField(label="Confirm password", widget=forms.PasswordInput)
+    password = forms.CharField(label="Password ", widget=forms.PasswordInput)
+    password2 = forms.CharField(label="Confirm Password ", widget=forms.PasswordInput)
 
     class Meta:
         model = UserBase
@@ -58,7 +58,7 @@ class RegistrationForm(forms.ModelForm):
         self.fields["user_name"].widget.attrs.update(
             {"class": "form-control mb-3", "placeholder": "Username"})
         self.fields["email"].widget.attrs.update(
-            {"class": "form-control mb-3", "placeholder": "E-mail", "name": "email", "id": "id_email"})
+            {"class": "form-control mb-3", "placeholder": "Email", "name": "email", "id": "id_email"})
         self.fields["password"].widget.attrs.update(
             {"class": "form-control mb-3", "placeholder": "Password"})
         self.fields["password2"].widget.attrs.update(
