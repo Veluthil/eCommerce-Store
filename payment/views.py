@@ -1,12 +1,14 @@
 import json
+import os
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import TemplateView
 
 from basket.basket import Basket
-from core.settings import SECRET_KEY_STRIPE
+from core.settings import SECRET_KEY_STRIPE, PUBLISHABLE_KEY_STRIPE
 from orders.views import payment_confirmation
 
 import stripe
@@ -25,7 +27,9 @@ def basket_view(request):
         currency="usd",
         metadata={"userid": request.user.id}
     )
-    return render(request, "payment/payment_start.html", {"client_secret": intent.client_secret})
+    return render(request, "payment/payment_start.html",
+                  {"client_secret": intent.client_secret,
+                   "PUBLISHABLE_KEY_STRIPE": PUBLISHABLE_KEY_STRIPE})
 
 
 @csrf_exempt
@@ -53,9 +57,13 @@ def stripe_webhook(request):
 def order_placed(request):
     basket = Basket(request)
     subject = "Order has been placed successfully."
-    message = "We confirm that your order has been placed.\n " \
+    message = "We confirm that your order has been placed.\n" \
               "Thank you for shopping with us!\n" \
               "Dokushou Vernissage Team"
     request.user.email_user(subject=subject, message=message)
     basket.clear()
     return render(request, "payment/orderplaced.html")
+
+
+class Error(TemplateView):
+    template_name = "payment/error.html"
