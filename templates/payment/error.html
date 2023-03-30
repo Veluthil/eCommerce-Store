@@ -1,0 +1,15 @@
+{% extends "./sub_base.html" %}
+{% block title %}
+Order Error
+{% endblock %}
+{% block sub_content %}
+
+<div class="container">
+  <div class="col-12 col-lg-6">
+    <h3 class="mb-4 fw-bold">Something went wrong.</h3>
+    <p>We're sorry, please contact our support team.</p>
+    <a href="{% url 'account:dashboard' %}">Your Dashboard</a>
+  </div>
+</div>
+
+{% endblock %}
