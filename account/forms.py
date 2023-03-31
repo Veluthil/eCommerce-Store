@@ -1,6 +1,5 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, SetPasswordForm
-from django_countries.fields import CountryField
 
 from .models import UserBase
 
@@ -108,7 +107,14 @@ class UserEditForm(forms.ModelForm):
                 "id": "form-about"
             }
         ))
-    country = CountryField()
+    country = forms.CharField(
+        label="Country", min_length=2, max_length=50, widget=forms.TextInput(
+            attrs={
+                "class": "form-control mb-3",
+                "placeholder": "country",
+                "id": "form-country"
+            }
+        ))
     phone_number = forms.CharField(
         label="Phone Number", min_length=4, max_length=15, widget=forms.TextInput(
             attrs={
