@@ -66,8 +66,12 @@ Your Basket Summary
             <div class="card mb-3 border-0 product-item" data-index="{{product.id}}">
                 <div class="row g-0">
                     <div class="col-md-2 d-none d-md-block">
-                        <img class="img-fluid mx-auto d-block" alt="Responsive image"
-                             src="{{ product.image.url }}"/>
+                        {% for image in product.product_image.all %}
+                        {% if image.is_feature %}
+                        <img class="img-fluid mx-auto d-block" src="{{ image.image.url }}"
+                             alt="{{ image.image.alt_text }}">
+                        {% endif %}
+                        {% endfor %}
                     </div>
                     <div class="col-md-10 ps-md-3">
                         <div class="card-body p-1">
