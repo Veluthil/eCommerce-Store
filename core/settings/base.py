@@ -4,14 +4,16 @@ from dotenv import load_dotenv
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
+# Load dotenv
+load_dotenv("D:/Programming/PythonEnV/.env.txt")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-k3-pwwb64stm&xudp+#sgcx38wt2&iy+97gu!o&(h(=mox(cto'
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -33,6 +35,7 @@ INSTALLED_APPS = [
     'account',
     'payment',
     'orders',
+    'mptt',
 ]
 
 MIDDLEWARE = [
@@ -145,7 +148,6 @@ EMAIL_HOST_PASSWORD = ''
 BASKET_SESSION_ID = 'basket'
 
 # Keys
-load_dotenv("D:/Programming/PythonEnV/.env.txt")
 SECRET_KEY_STRIPE = os.getenv("SECRET_KEY_STRIPE_ECOMMERCE")
 PUBLISHABLE_KEY_STRIPE = os.getenv("PUBLIC_KEY_STRIPE_ECOMMERCE")
 # Stripe payment
