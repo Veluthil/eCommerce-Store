@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
 
 from basket.basket import Basket
-from core.settings import SECRET_KEY_STRIPE, PUBLISHABLE_KEY_STRIPE
+from core.settings.base import SECRET_KEY_STRIPE, PUBLISHABLE_KEY_STRIPE
 from orders.views import payment_confirmation
 
 import stripe
