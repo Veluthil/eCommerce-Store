@@ -3,192 +3,210 @@
 <html>
 
 <head>
-    <meta charset="utf-8"/>
-    <title>{% block title %}DokushouVernissage{% endblock %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
-            integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-            integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-            integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-            crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{% static 'core/css/base.css' %}">
-    <link rel="stylesheet" href="{% block stylesheet %}{% endblock %}">
+  <meta charset="utf-8"/>
+  <title>{% block title %}DokushouVernissage{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+          integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+          integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+          integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+          crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{% static 'core/css/base.css' %}">
+  <link rel="stylesheet" href="{% block stylesheet %}{% endblock %}">
 </head>
 
 <body>
 <header class="pb-3">
-    <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
-        <div class="container-fluid px-md-4">
-            <div class="d-flex w-100 navbar-collapse">
-                <a class="navbar-brand d-flex-inline" href="/">
-                    <h4><a class="navbar-brand fw-bold" href="/">DokushouVernissage</a></h4>
+  <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
+    <div class="container-fluid px-md-4">
+      <div class="d-flex w-100 navbar-collapse">
+        <a class="navbar-brand d-flex-inline" href="/">
+          <h4><a class="navbar-brand fw-bold" href="/">DokushouVernissage</a></h4>
+        </a>
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-none d-md-block fw500" href="#" id="navbarDropdown"
+               role="button"
+               data-bs-toggle="dropdown" aria-expanded="false">
+              All
+              <i class="ps-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-chevron-down" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd"
+                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                </svg>
+              </i>
+            </a>
+            <ul class="dropdown-menu rounded-0 border-0" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{% url 'store:store_home' %}">All</a></li>
+              {% for c in categories %}
+              {% if category.slug == c.slug %}
+              <li class="selected">
+                <a class="dropdown-item" href="{{ c.get_absolute_url }}">{{ c.name|title }}</a>
+              </li>
+              {% endif %}
+              {% endfor %}
+            </ul>
+          </li>
+        </ul>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+                aria-label="Toggle navigation">
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                 class="bi bi-list"
+                 viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                    d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+            </svg>
+          </div>
+          <span class="fs15 fw500">Shop</span>
+        </button>
+        <div>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent2">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-reset" href="#" id="navbarDropdown"
+                   role="button"
+                   data-bs-toggle="dropdown" aria-expanded="false">
+                  <div class="small text-muted">Hello,
+                    {% if user.is_authenticated %}
+                    {{ request.user.name }}
+                    {% else %}
+                    Login
+                    {% endif %}
+                  </div>
+                  <span class="fs15 fw500">Account &amp; Lists
+                    </span>
                 </a>
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle d-none d-md-block fw500" href="#" id="navbarDropdown"
-                           role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            All
-                            <i class="ps-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                     class="bi bi-chevron-down" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                          d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-                                </svg>
-                            </i>
-                        </a>
-                        <ul class="dropdown-menu rounded-0 border-0" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{% url 'store:store_home' %}">All</a></li>
-                            {% for c in categories %}
-                                <li>
-                                    <a class="dropdown-item" href="{{ c.get_absolute_url }}">{{ c.name|title }}</a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </li>
-                </ul>
-                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
-                             class="bi bi-list"
-                             viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                  d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-                        </svg>
-                    </div>
-                    <span class="fs15 fw500">Shop</span>
-                </button>
-
-
-                {% if user.is_authenticated %}
-                <a type="button" role="button" href="{% url 'account:logout' %}"
-                   class="btn btn-outline-secondary border-0 basket-btn">
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
-                             class="bi bi-door-open" viewBox="0 0 16 16">
-                            <path d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
-                            <path d="M10.828.122A.5.5 0 0 1 11 .5V1h.5A1.5 1.5 0 0 1 13 2.5V15h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117zM11.5 2H11v13h1V2.5a.5.5 0 0 0-.5-.5zM4 1.934V15h6V1.077l-6 .857z"/>
-                        </svg>
-                    </div>
-                    <span class="fs15 fw500">Logout</span>
-                </a>
-                {% else %}
-                <a type="button" role="button" href="{% url 'account:login' %}"
-                   class="btn btn-outline-secondary border-0 basket-btn">
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
-                             class="bi bi-door-closed" viewBox="0 0 16 16">
-                            <path
-                                    d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z"/>
-                            <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"/>
-                        </svg>
-                    </div>
-                    <span class="fs15 fw500">Login</span>
-                </a>
-                {% endif %}
-
-                <a type="button" role="button" href="{% url 'account:dashboard' %}"
-                   class="btn btn-outline-secondary border-0 basket-btn">
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
-                             class="bi bi-person" viewBox="0 0 16 16">
-                            <path
-                                    d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                        </svg>
-                    </div>
-                    <span class="fs15 fw500">Account</span>
-                </a>
-                <a type="button" role="button" href="{% url 'basket:basket_summary' %}"
-                   class="btn btn-outline-secondary border-0 basket-btn">
-
-                    {% with total_qty=basket|length %}
-                    <div id="basket-qty" class="basket-qty">
-                        {% if total_qty > 0 %}
-                        {{ total_qty }}
+                <div class="dropdown-menu rounded-0" aria-labelledby="navbarDropdown">
+                  <div class="card border-0">
+                    <div class="card-body">
+                      <h6 class="card-title">My Account</h6>
+                      <ul class="list-group list-group-flush dropdown-account-link">
+                        {% if user.is_authenticated %}
+                        <li><a href="{% url 'account:dashboard' %}" class="text-reset small
+                                                list-group-item p-0 pb-1 border-0 dropdown-account-link">Your
+                          Account</a></li>
+                        <li><a href="#"
+                               class="text-reset small list-group-item p-0 pb-1 border-0 dropdown-account-link">Orders</a>
+                        </li>
+                        <li><a href="{% url 'account:logout' %}" class="text-reset small
+                                                list-group-item p-0 pb-1 border-0 dropdown-account-link">Logout</a></li>
                         {% else %}
-                        0
+                        <li><a href="{% url 'account:login' %}" class="text-reset small
+                                                list-group-item p-0 pb-1 border-0 dropdown-account-link">Login</a></li>
                         {% endif %}
+                      </ul>
                     </div>
-                    {% endwith %}
-
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
-                             class="bi bi-cart3" viewBox="0 0 16 16">
-                            <path
-                                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                        </svg>
-                    </div>
-                    <span class="fs15 fw500">Basket</span>
-                </a>
-            </div>
-            <div class="d-md-none d-lg-none d-xl-none">
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                        <li><a class="dropdown-item" href="{% url 'store:store_home' %}">All</a></li>
-
-
-                    </ul>
+                  </div>
                 </div>
-            </div>
-            <form class="d-flex w-100 d-md-none">
-                <input class="form-control me-2" type="search" placeholder="Search products or FAQ"
-                       aria-label="Search">
-                <button class="btn btn-outline-secondary" type="submit">Search</button>
-            </form>
+              </li>
+            </ul>
+          </div>
         </div>
-    </nav>
+        <a type="button" role="button" href="{% url 'basket:basket_summary' %}"
+           class="btn btn-outline-secondary border-0 basket-btn">
+          {% with total_qty=basket|length %}
+          <div id="basket-qty" class="basket-qty">
+            {% if total_qty > 0 %}
+            {{ total_qty }}
+            {% else %}
+            0
+            {% endif %}
+          </div>
+          {% endwith %}
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                 class="bi bi-cart3"
+                 viewBox="0 0 16 16">
+              <path
+                      d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+            </svg>
+          </div>
+          <span class="fs15 fw500">Basket</span>
+        </a>
+      </div>
+      <div class="d-md-none d-lg-none d-xl-none">
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li><a class="dropdown-item" href="{% url 'store:store_home' %}">All</a></li>
+            {% for c in categories %}
+            {% if category.slug == c.slug %}
+            <li class="selected">
+              <a class="dropdown-item" href="{{ c.get_absolute_url }}">{{ c.name|title }}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+          <h6 class="card-title fw-bold">My Account</h6>
+          <ul class="list-group list-group-flush dropdown-account-link">
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'account:dashboard' %}" class="dropdown-item">Your Account</a></li>
+            <li><a href="#" class="dropdown-item">Orders</a></li>
+            <li><a href="{% url 'account:logout' %}" class="dropdown-item">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'account:login' %}" class="dropdown-item">Login</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+      <form class="d-flex w-100 d-md-none">
+        <input class="form-control me-2" type="search" placeholder="Search products or FAQ" aria-label="Search">
+        <button class="btn btn-outline-secondary" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
 </header>
 
 <main class="pt-5">
-    <div id="content">{% block content %} {% endblock %}</div>
+  <div id="content">{% block content %} {% endblock %}</div>
 </main>
 
 <footer class="container py-5 footer">
-    <hr>
-    <div class="row pt-4">
-        <div class="col-3 fs15">
-            <h5 class="fw-bold">Dokushou</h5>
-            <h5 class="fw-bold">Vernissage</h5>
-            <small class="d-block mb-3 text-muted">&copy; 2023</small>
-        </div>
-        <div class="col-3 col-md fs15">
-            <h5>Features</h5>
-            <ul class="list-unstyled">
-                <li><a class="link-secondary text-decoration-none" href="#">Cool stuff</a></li>
-                <li><a class="link-secondary text-decoration-none" href="#">Random feature</a></li>
-                <li><a class="link-secondary text-decoration-none" href="#">Team feature</a></li>
-                <li><a class="link-secondary text-decoration-none" href="#">Stuff for developers</a></li>
-                <li><a class="link-secondary text-decoration-none" href="#">Another one</a></li>
-                <li><a class="link-secondary text-decoration-none" href="#">Last time</a></li>
-            </ul>
-        </div>
-        <div class="col-3 col-md fs15">
-            <h5>Resources</h5>
-            <ul class="list-unstyled">
-                <li><a class="link-secondary text-decoration-none" href="#">Resource name</a></li>
-                <li><a class="link-secondary text-decoration-none" href="#">Resource</a></li>
-                <li><a class="link-secondary text-decoration-none" href="#">Another resource</a></li>
-                <li><a class="link-secondary text-decoration-none" href="#">Final resource</a></li>
-            </ul>
-        </div>
-        <div class="col-3 col-md fs15">
-            <h5>About</h5>
-            <ul class="list-unstyled">
-                <li><a class="link-secondary text-decoration-none" href="#">Team</a></li>
-                <li><a class="link-secondary text-decoration-none" href="#">Locations</a></li>
-                <li><a class="link-secondary text-decoration-none" href="#">Privacy</a></li>
-                <li><a class="link-secondary text-decoration-none" href="#">Terms</a></li>
-            </ul>
-        </div>
+  <hr>
+  <div class="row pt-4">
+    <div class="col-3 fs15">
+      <h5 class="fw-bold">Dokushou</h5>
+      <h5 class="fw-bold">Vernissage</h5>
+      <small class="d-block mb-3 text-muted">&copy; 2023</small>
     </div>
+    <div class="col-3 col-md fs15">
+      <h5>Features</h5>
+      <ul class="list-unstyled">
+        <li><a class="link-secondary text-decoration-none" href="#">Cool stuff</a></li>
+        <li><a class="link-secondary text-decoration-none" href="#">Random feature</a></li>
+        <li><a class="link-secondary text-decoration-none" href="#">Team feature</a></li>
+        <li><a class="link-secondary text-decoration-none" href="#">Stuff for developers</a></li>
+        <li><a class="link-secondary text-decoration-none" href="#">Another one</a></li>
+        <li><a class="link-secondary text-decoration-none" href="#">Last time</a></li>
+      </ul>
+    </div>
+    <div class="col-3 col-md fs15">
+      <h5>Resources</h5>
+      <ul class="list-unstyled">
+        <li><a class="link-secondary text-decoration-none" href="#">Resource name</a></li>
+        <li><a class="link-secondary text-decoration-none" href="#">Resource</a></li>
+        <li><a class="link-secondary text-decoration-none" href="#">Another resource</a></li>
+        <li><a class="link-secondary text-decoration-none" href="#">Final resource</a></li>
+      </ul>
+    </div>
+    <div class="col-3 col-md fs15">
+      <h5>About</h5>
+      <ul class="list-unstyled">
+        <li><a class="link-secondary text-decoration-none" href="#">Team</a></li>
+        <li><a class="link-secondary text-decoration-none" href="#">Locations</a></li>
+        <li><a class="link-secondary text-decoration-none" href="#">Privacy</a></li>
+        <li><a class="link-secondary text-decoration-none" href="#">Terms</a></li>
+      </ul>
+    </div>
+  </div>
 </footer>
 </body>
 
