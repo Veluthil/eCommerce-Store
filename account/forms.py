@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, SetPasswordForm
 
-from .models import UserBase
+from .models import Customer
 
 
 class UserLoginForm(AuthenticationForm):
@@ -30,12 +30,12 @@ class RegistrationForm(forms.ModelForm):
     password2 = forms.CharField(label="Confirm Password ", widget=forms.PasswordInput)
 
     class Meta:
-        model = UserBase
+        model = Customer
         fields = ('user_name', 'email',)
 
     def clean_username(self):
         user_name = self.cleaned_data["user_name"].lower()
-        r = UserBase.objects.filter(user_name=user_name)
+        r = Customer.objects.filter(user_name=user_name)
         if r.count():
             raise forms.ValidationError("Username already exists.")
         return user_name
@@ -48,7 +48,7 @@ class RegistrationForm(forms.ModelForm):
 
     def clean_email(self):
         email = self.cleaned_data["email"]
-        if UserBase.objects.filter(email=email).exists():
+        if Customer.objects.filter(email=email).exists():
             raise forms.ValidationError("Email already exists in the database. Try to log in instead.")
         return email
 
@@ -157,7 +157,7 @@ class UserEditForm(forms.ModelForm):
         ))
 
     class Meta:
-        model = UserBase
+        model = Customer
         fields = ("email", "user_name", "first_name", "surname", "about", "country", "phone_number", "postcode",
                   "address_1", "address_2", "city",)
 
@@ -178,7 +178,7 @@ class PwdResetForm(PasswordResetForm):
 
     def clean_email(self):
         email = self.cleaned_data["email"]
-        u = UserBase.objects.filter(email=email)
+        u = Customer.objects.filter(email=email)
         if not u:
             raise forms.ValidationError(
                 "We could not find this account, sorry."
