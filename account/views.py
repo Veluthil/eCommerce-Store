@@ -5,15 +5,14 @@ from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.http import HttpResponse
 
 from orders.views import user_orders
 from .forms import RegistrationForm, UserEditForm
-from .models import UserBase
+from .models import Customer, Address
 from .token import account_activation_token
 
 
-@login_required()
+@login_required
 def dashboard(request):
     orders = user_orders(request)
     return render(request, "account/dashboard/dashboard.html", {"orders": orders})
@@ -49,7 +48,7 @@ def account_register(request):
 def account_activate(request, uidb64, token):
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
-        user = UserBase.objects.get(pk=uid)
+        user = Customer.objects.get(pk=uid)
         if user is not None and account_activation_token.check_token(user, token):
             user.is_active = True
             user.save()
@@ -61,7 +60,7 @@ def account_activate(request, uidb64, token):
         user = None
 
 
-@login_required()
+@login_required
 def edit_details(request):
     if request.method == "POST":
         user_form = UserEditForm(instance=request.user, data=request.POST)
@@ -72,11 +71,18 @@ def edit_details(request):
     return render(request, "account/dashboard/edit_details.html", {"user_form": user_form})
 
 
-@login_required()
+@login_required
 def delete_user(request):
-    user = UserBase.objects.get(user_name=request.user)
+    user = Customer.objects.get(user_name=request.user)
     user.is_active = False
     user.save()
     logout(request)
     return redirect("account:delete_confirmation")
 
+
+# Addresses Section
+
+@login_required
+def view_address(request):
+    addresses = Address.objects.filter(customer=request.user)
+    return render(request, "account/dashboard/addresses.html", {"addresses": addresses})
