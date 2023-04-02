@@ -4,6 +4,7 @@ Edit Profile
 {% endblock %}
 {% block sub_content %}
 
+<div class="col-6 mx-auto">
 <form class="account-form" method="post" enctype="multipart/form-data">
     {% if user_form.is_valid %}
     <div class="alert alert-primary" role="alert">
@@ -57,5 +58,6 @@ Edit Profile
         Delete
     </button>
 </form>
+</div>
 
 {% endblock %}
