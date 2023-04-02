@@ -88,20 +88,19 @@
                 <div class="dropdown-menu rounded-0" aria-labelledby="navbarDropdown">
                   <div class="card border-0">
                     <div class="card-body">
-                      <h6 class="card-title">My Account</h6>
+                      <h6 class="card-title fw-bold">My Account</h6>
                       <ul class="list-group list-group-flush dropdown-account-link">
                         {% if user.is_authenticated %}
-                        <li><a href="{% url 'account:dashboard' %}" class="text-reset small
+                        <a href="{% url 'account:dashboard' %}" class="text-reset small
                                                 list-group-item p-0 pb-1 border-0 dropdown-account-link">Your
-                          Account</a></li>
-                        <li><a href="#"
+                          Account</a>
+                        <a href="#"
                                class="text-reset small list-group-item p-0 pb-1 border-0 dropdown-account-link">Orders</a>
-                        </li>
-                        <li><a href="{% url 'account:logout' %}" class="text-reset small
-                                                list-group-item p-0 pb-1 border-0 dropdown-account-link">Logout</a></li>
+                        <a href="{% url 'account:logout' %}" class="text-reset small
+                                                list-group-item p-0 pb-1 border-0 dropdown-account-link">Logout</a>
                         {% else %}
-                        <li><a href="{% url 'account:login' %}" class="text-reset small
-                                                list-group-item p-0 pb-1 border-0 dropdown-account-link">Login</a></li>
+                        <a href="{% url 'account:login' %}" class="text-reset small
+                                                list-group-item p-0 pb-1 border-0 dropdown-account-link">Login</a>
                         {% endif %}
                       </ul>
                     </div>
@@ -136,7 +135,7 @@
       <div class="d-md-none d-lg-none d-xl-none">
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li><a class="dropdown-item" href="{% url 'store:store_home' %}">All</a></li>
+            <li><a class="dropdown-item fw-bold" href="{% url 'store:store_home' %}">All</a></li>
             {% for c in categories %}
             {% if category.slug == c.slug %}
             <li class="selected">
@@ -148,11 +147,11 @@
           <h6 class="card-title fw-bold">My Account</h6>
           <ul class="list-group list-group-flush dropdown-account-link">
             {% if user.is_authenticated %}
-            <li><a href="{% url 'account:dashboard' %}" class="dropdown-item">Your Account</a></li>
-            <li><a href="#" class="dropdown-item">Orders</a></li>
-            <li><a href="{% url 'account:logout' %}" class="dropdown-item">Logout</a></li>
+            <a href="{% url 'account:dashboard' %}" class="dropdown-item">Your Account</a>
+            <a href="#" class="dropdown-item">Orders</a>
+            <a href="{% url 'account:logout' %}" class="dropdown-item">Logout</a>
             {% else %}
-            <li><a href="{% url 'account:login' %}" class="dropdown-item">Login</a></li>
+            <a href="{% url 'account:login' %}" class="dropdown-item">Login</a>
             {% endif %}
           </ul>
         </div>
