@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, SetPasswordForm
 
-from .models import Customer
+from .models import Customer, Address
 
 
 class UserLoginForm(AuthenticationForm):
@@ -165,6 +165,33 @@ class UserEditForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields["user_name"].required = True
         self.fields["email"].required = True
+
+
+class UserAddressForm(forms.ModelForm):
+    class Meta:
+        model = Address
+        fields = ["full_name", "phone", "address_line_1", "address_line_2", "postcode", "town_city"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["full_name"].widget.attrs.update(
+            {"class": "form-control mb-2 account-form", "placeholder": "Full Name"}
+        )
+        self.fields["phone"].widget.attrs.update(
+            {"class": "form-control mb-2 account-form", "placeholder": "Phone Number"}
+        )
+        self.fields["address_line_1"].widget.attrs.update(
+            {"class": "form-control mb-2 account-form", "placeholder": "Address Line 1"}
+        )
+        self.fields["address_line_2"].widget.attrs.update(
+            {"class": "form-control mb-2 account-form", "placeholder": "Address Line 2"}
+        )
+        self.fields["postcode"].widget.attrs.update(
+            {"class": "form-control mb-2 account-form", "placeholder": "Postcode"}
+        )
+        self.fields["town_city"].widget.attrs.update(
+            {"class": "form-control mb-2 account-form", "placeholder": "Town/City/State"}
+        )
 
 
 class PwdResetForm(PasswordResetForm):
