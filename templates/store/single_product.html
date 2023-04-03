@@ -11,6 +11,13 @@ Product
 
 {% block content %}
 <div class="container">
+    {% if messages %}
+    <div class="alert alert-warning alert-{{ message.tags }}" role="alert">
+        {% for message in messages %}
+        {{ message|safe }} <a href="{% url 'account:wishlist' %}">Show your Wish List</a>
+        {% endfor %}
+    </div>
+    {% endif %}
     <div class="row g-3">
         <div class="col-md-5 ps-3 col-lg-5 order-md-last p-0 order-1">
             <div class="d-grid gap-2">
@@ -35,9 +42,8 @@ Product
                 <button type="button" id="add-button" value="{{product.id}}" class="btn btn-success fw500">
                     Add to Basket
                 </button>
-                <button type="button" id="add-button" value="{{product.id}}" class="btn btn-light fw500">
-                    Add to Favorites
-                </button>
+                <a href="{% url 'account:user_wishlist' product.id %}" class="btn btn-light fw500" role="button"
+                aria-disabled="true">Add to Wish List</a>
             </div>
         </div>
         <div class="col-md-7 col-lg-7 p-0">
@@ -55,13 +61,13 @@ Product
                                  src="{{ image.image.url }}" alt="{{ image.image.alt_text }}">
                             {% endif %}
                             {% endfor %}
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 
@@ -83,6 +89,7 @@ Product
             error: function (xhr, errmsg, err) {}
         });
     })
+
 
 
 
