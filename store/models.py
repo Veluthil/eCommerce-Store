@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from mptt.models import MPTTModel, TreeForeignKey
@@ -126,6 +127,11 @@ class Product(models.Model):
     updated_at = models.DateTimeField(
         _("Updated at"),
         auto_now=True
+    )
+    user_wishlist = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name="user_wishlist",
+        blank=True
     )
 
     class Meta:
