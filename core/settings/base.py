@@ -32,8 +32,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'store',
     'basket',
+    'checkout',
     'account',
-    'payment',
     'orders',
     'mptt',
 ]
@@ -147,8 +147,3 @@ EMAIL_HOST_PASSWORD = ''
 # Basket session ID
 BASKET_SESSION_ID = 'basket'
 
-# Keys
-SECRET_KEY_STRIPE = os.getenv("SECRET_KEY_STRIPE_ECOMMERCE")
-PUBLISHABLE_KEY_STRIPE = os.getenv("PUBLIC_KEY_STRIPE_ECOMMERCE")
-# Stripe payment
-STRIPE_ENDPOINT_SECRET = os.getenv("STRIPE_ENDPOINT_SECRET")
