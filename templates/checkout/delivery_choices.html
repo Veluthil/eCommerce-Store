@@ -44,7 +44,7 @@ Delivery Options
         <div class="p-2 bd-highlight"><span class="fw-bold h5">$</span><span id="total"
             class="fw-bold h5">{{basket.get_total_price}}</span></div>
       </div>
-      <a role="button" href="" class="btn btn-success fw-bold w-100"
+      <a role="button" href="{% url 'checkout:delivery_address' %}" class="btn btn-success fw-bold w-100"
         type="button">Pay Securely</a>
     </div>
     <div class="col-md-7 col-lg-8">
