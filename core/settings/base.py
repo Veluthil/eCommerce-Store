@@ -147,3 +147,9 @@ EMAIL_HOST_PASSWORD = ''
 # Basket session ID
 BASKET_SESSION_ID = 'basket'
 
+# PayPal
+# allow pop-ups
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
+# keys
+PAYPAL_CLIENT_ID = os.getenv("EC_PAYPAL_CLIENT_ID")
+PAYPAL_SECRET = os.getenv("EC_PAYPAL_SECRET")
