@@ -18,11 +18,11 @@ class CustomAccountManager(BaseUserManager):
             raise ValueError("Superuser must be assigned to is_superuser=True")
         return self.create_user(email, name, password, **other_fields)
 
-    def create_user(self, email, name, password, **other_fields):
+    def create_user(self, email, username, password, **other_fields):
         if not email:
             raise ValueError(_("You must provide an email address to continue."))
         email = self.normalize_email(email)
-        user = self.model(email=email, name=name, **other_fields)
+        user = self.model(email=email, username=username, **other_fields)
         user.set_password(password)
         user.save()
         return user
@@ -31,7 +31,7 @@ class CustomAccountManager(BaseUserManager):
 class Customer(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField(_("email address"), unique=True)
-    name = models.CharField(max_length=100)
+    username = models.CharField(max_length=100)
     mobile = models.CharField(max_length=20, blank=True)
 
     # User status
@@ -43,7 +43,7 @@ class Customer(AbstractBaseUser, PermissionsMixin):
     objects = CustomAccountManager()
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["name"]
+    REQUIRED_FIELDS = ["username"]
 
     class Meta:
         verbose_name = "Accounts"
