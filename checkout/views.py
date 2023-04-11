@@ -50,6 +50,8 @@ def delivery_address(request):
         return HttpResponseRedirect(request.META["HTTP_REFERER"])
 
     addresses = Address.objects.filter(customer=request.user).order_by("-default")
+    if len(addresses) == 0:
+        return render(request, "account/dashboard/addresses.html")
 
     if "address" not in request.session:
         session["address"] = {"address_id": str(addresses[0].id)}
