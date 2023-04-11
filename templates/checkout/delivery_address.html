@@ -50,6 +50,9 @@ Basket Summary
             {% for address in addresses %}
             {% if not address.default %}
             <h1 class="h5 pt-4">Other Addresses</h1>
+            {% elif addresses|length == 0 %}
+            <div class="col-12">There are no delivery addresses, <a href="{% url 'account:add_address' %}">add address</a>
+        </div>
             {% endif %}
             <div class="card mb-3 border-1 rounded-0 product-item me-md-4" data-index="{{option.id}}">
                 <div class="row g-0">
