@@ -26,7 +26,7 @@ Delivery Options
 {% endif %}
   <div class="row g-3">
     {% if delivery_options|length == 0 %}
-    <div class="col-12">There are no delivery options <a href="{% url 'store:store_home' %}">Shop</a></div>
+    <div class="col-12">There are no delivery options <a href="{% url 'catalogue:catalogue_home' %}">Shop</a></div>
     {% else %}
     <div class="col-md-4 col-lg-4 order-md-last p-0 order-3">
       <div class="d-flex bd-highlight ms-0">

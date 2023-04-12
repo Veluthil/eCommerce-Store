@@ -18,7 +18,7 @@ Your Basket Summary
     <div class="row g-3">
         {% if basket|length == 0 %}
         <div class="col-12">
-            You haven't added any products to your basket yet. <a href="{% url 'store:store_home' %}">Go to Shop.</a>
+            You haven't added any products to your basket yet. <a href="{% url 'catalogue:catalogue_home' %}">Go to Shop.</a>
         </div>
         {% else %}
         <div class="col-12 bg-light p-3 d-flex justify-content-between">
