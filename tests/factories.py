@@ -2,12 +2,13 @@ import factory.django
 
 from ecommerce.apps.catalogue.models import Category, ProductType, ProductSpecification, Product, \
     ProductSpecificationValue
+from ecommerce.apps.account.models import Address, Customer
 from faker import Faker
 
 fake = Faker()
 
 
-# --------- Catalogue ----------
+# --------- Catalogue ---------
 class CategoryFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Category
@@ -52,3 +53,37 @@ class ProductSpecificationValueFactory(factory.django.DjangoModelFactory):
     product = factory.SubFactory(ProductFactory)
     specification = factory.SubFactory(ProductSpecificationFactory)
     value = "100"
+
+
+# --------- Account ---------
+class CustomerFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Customer
+
+    email = "a@a.com"
+    name = "user1"
+    mobile = "111111111"
+    password = "test"
+    is_active = True
+    is_staff = False
+
+    @classmethod
+    def _create(cls, model_class, *args, **kwargs):
+        manager = cls._get_manager(model_class)
+        if "is_superuser" in kwargs:
+            return manager.create_superuser(*args, **kwargs)
+        else:
+            return manager.create_user(*args, **kwargs)
+
+
+class AddressFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Address
+
+    customer = factory.SubFactory(CustomerFactory)
+    full_name = fake.name()
+    phone = fake.phone_number()
+    postcode = fake.postcode()
+    address_line_1 = fake.street_address()
+    address_line_2 = fake.street_address()
+    town_city = fake.city_suffix()

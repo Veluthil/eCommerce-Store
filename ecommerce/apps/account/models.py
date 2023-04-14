@@ -1,26 +1,41 @@
 import uuid
 
+from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
+from django.core.validators import validate_email
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.utils.translation import gettext_lazy as _
 
 
 class CustomAccountManager(BaseUserManager):
+    def validate_email(self, email):
+        try:
+            validate_email(email)
+        except ValidationError:
+            raise ValueError(_("You must provide a valid email address."))
 
     def create_superuser(self, email, name, password, **other_fields):
         other_fields.setdefault("is_staff", True)
         other_fields.setdefault("is_superuser", True)
         other_fields.setdefault("is_active", True)
         if other_fields.get("is_staff") is not True:
-            raise ValueError("Superuser must be assigned to is_staff=True")
+            raise ValueError("Superuser must be assigned to is_staff=True.")
         if other_fields.get("is_superuser") is not True:
-            raise ValueError("Superuser must be assigned to is_superuser=True")
+            raise ValueError("Superuser must be assigned to is_superuser=True.")
+        if email:
+            email = self.normalize_email(email)
+            self.validate_email(email)
+        else:
+            raise ValueError(_("Superuser Account: you must provide a valid email address."))
         return self.create_user(email, name, password, **other_fields)
 
     def create_user(self, email, name, password, **other_fields):
-        if not email:
-            raise ValueError(_("You must provide an email address to continue."))
+        if email:
+            email = self.normalize_email(email)
+            self.validate_email(email)
+        else:
+            raise ValueError(_("Customer Account: you must provide a valid email address."))
         email = self.normalize_email(email)
         user = self.model(email=email, name=name, **other_fields)
         user.set_password(password)
@@ -83,4 +98,4 @@ class Address(models.Model):
         verbose_name_plural = "Addresses"
 
     def __str__(self):
-        return "Address"
+        return f"{self.full_name}'s Address"
