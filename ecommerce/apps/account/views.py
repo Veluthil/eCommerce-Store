@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
 from django.urls import reverse
@@ -43,8 +43,10 @@ def account_register(request):
                 "token": account_activation_token.make_token(user),
             })
             user.email_user(subject=subject, message=message)
-            print(message)
+            # print(message)
             return render(request, "account/registration/register_email_confirm.html", {"form": register_form})
+        else:
+            HttpResponse("Error handler content", status=400)
     else:
         register_form = RegistrationForm()
     return render(request, "account/registration/register.html", {"form": register_form})
@@ -102,6 +104,8 @@ def add_address(request):
             address_form.customer = request.user
             address_form.save()
             return HttpResponseRedirect(reverse("account:addresses"))
+        else:
+            return HttpResponse("Error handler content", status=400)
     else:
         address_form = UserAddressForm()
     return render(request, "account/dashboard/edit_addresses.html", {"form": address_form})
