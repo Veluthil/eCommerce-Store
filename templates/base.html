@@ -75,9 +75,9 @@
                 <a class="nav-link dropdown-toggle text-reset" href="#" id="navbarDropdown"
                    role="button"
                    data-bs-toggle="dropdown" aria-expanded="false">
-                  <div class="small text-muted">Hello,
+                  <div class="small text-muted">
                     {% if user.is_authenticated %}
-                    {{ request.user.name }}
+                    Hello, {{ request.user.name }}
                     {% else %}
                     Login
                     {% endif %}
