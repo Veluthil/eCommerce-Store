@@ -18,8 +18,9 @@ Your Wish List
             <div class="col-md-2">
                 {% for image in product.product_image.all %}
                 {% if image.is_feature %}
+                <a  href="{{product.get_absolute_url}}">
                 <img class="img-fluid d-block p-2" width="135px" src="{{ image.image.url }}"
-                     alt="{{ image.image.alt_text }}"/>
+                     alt="{{ image.image.alt_text }}"/></a>
                 {% endif %}
                 {% endfor %}
             </div>
