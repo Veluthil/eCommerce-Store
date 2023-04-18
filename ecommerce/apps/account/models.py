@@ -47,7 +47,6 @@ class Customer(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField(_("email address"), unique=True)
     name = models.CharField(max_length=100)
-    mobile = models.CharField(max_length=20, blank=True)
 
     # User status
     is_active = models.BooleanField(default=False)
