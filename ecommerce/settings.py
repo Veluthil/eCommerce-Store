@@ -60,7 +60,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'ecommerce.apps.catalogue.context_processors.all_categories',
+                'ecommerce.apps.catalogue.context_processors.categories',
                 'ecommerce.apps.basket.context_processors.basket',
             ],
         },
