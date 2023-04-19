@@ -91,6 +91,11 @@ class Product(models.Model):
         help_text=_("Not Required"),
         blank=True
     )
+    description_detailed = models.TextField(
+        verbose_name=_("Description detailed"),
+        help_text=_("Not Required"),
+        blank=True
+    )
     slug = models.SlugField(max_length=255)
     regular_price = models.DecimalField(
         verbose_name=_("Regular price"),
