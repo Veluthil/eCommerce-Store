@@ -49,6 +49,13 @@ class Basket:
             new_price = DeliveryOptions.objects.get(id=self.session["purchase"]["delivery_id"]).delivery_price
         return new_price
 
+    def get_delivery_option(self):
+        """Check user's session for previously chosen shipping method."""
+        new_delivery_option = ""
+        if "purchase" in self.session:
+            new_delivery_option = DeliveryOptions.objects.get(id=self.session["purchase"]["delivery_id"]).delivery_name
+        return new_delivery_option
+
     def get_total_price(self):
         """Get the total price of the items in the basket including the shipping payment."""
         subtotal = sum(Decimal(item["price"]) * item["qty"] for item in self.basket.values())
@@ -91,24 +98,3 @@ class Basket:
     def save_session(self):
         """Save the modified session data."""
         self.session.modified = True
-
-
-"""
-MIT License
-Copyright (c) 2019 Packt
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-"""
