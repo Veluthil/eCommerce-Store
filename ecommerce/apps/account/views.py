@@ -37,6 +37,7 @@ def account_register(request):
             current_site = get_current_site(request)
             subject = "Activate your Account"
             message = render_to_string("account/registration/account_activation_email.html", {
+                "name": user.name,
                 "dashboard": user,
                 "domain": current_site.domain,
                 "uid": urlsafe_base64_encode(force_bytes(user.pk)),
@@ -80,7 +81,7 @@ def edit_details(request):
 
 @login_required
 def delete_user(request):
-    user = Customer.objects.get(user_name=request.user)
+    user = Customer.objects.get(name=request.user)
     user.is_active = False
     user.save()
     logout(request)
