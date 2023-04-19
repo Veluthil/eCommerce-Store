@@ -5,10 +5,10 @@ from .models import Customer, Address
 
 
 class UserLoginForm(AuthenticationForm):
-    user_name = forms.CharField(widget=forms.TextInput(
+    username = forms.CharField(widget=forms.TextInput(
         attrs={
             "class": "form-control mb-3",
-            "placeholder": "Email",
+            "placeholder": "Username",
             "id": "login-username",
         }
     ))
@@ -22,7 +22,7 @@ class UserLoginForm(AuthenticationForm):
 
 
 class RegistrationForm(forms.ModelForm):
-    user_name = forms.CharField(label="Enter Username ", min_length=4, max_length=30, help_text="Required")
+    name = forms.CharField(label="Enter Username ", min_length=4, max_length=30, help_text="Required")
     email = forms.EmailField(label="Email ", max_length=50, help_text="Required", error_messages={
         "Required": "You have to add your email address."
     })
@@ -31,14 +31,14 @@ class RegistrationForm(forms.ModelForm):
 
     class Meta:
         model = Customer
-        fields = ('user_name', 'email',)
+        fields = ('name', 'email',)
 
     def clean_username(self):
-        user_name = self.cleaned_data["user_name"].lower()
-        r = Customer.objects.filter(user_name=user_name)
+        name = self.cleaned_data["name"].lower()
+        r = Customer.objects.filter(name=name)
         if r.count():
             raise forms.ValidationError("Username already exists.")
-        return user_name
+        return name
 
     def clean_password2(self):
         cd = self.cleaned_data
@@ -54,7 +54,7 @@ class RegistrationForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["user_name"].widget.attrs.update(
+        self.fields["name"].widget.attrs.update(
             {"class": "form-control mb-3", "placeholder": "Username"})
         self.fields["email"].widget.attrs.update(
             {"class": "form-control mb-3", "placeholder": "Email", "name": "email", "id": "id_email"})
@@ -99,72 +99,21 @@ class UserEditForm(forms.ModelForm):
                 "id": "form-surname"
             }
         ))
-    about = forms.CharField(
-        label="About", min_length=4, max_length=500, widget=forms.TextInput(
-            attrs={
-                "class": "form-control mb-3",
-                "placeholder": "About",
-                "id": "form-about"
-            }
-        ))
-    country = forms.CharField(
-        label="Country", min_length=2, max_length=50, widget=forms.TextInput(
-            attrs={
-                "class": "form-control mb-3",
-                "placeholder": "country",
-                "id": "form-country"
-            }
-        ))
-    phone_number = forms.CharField(
-        label="Phone Number", min_length=4, max_length=15, widget=forms.TextInput(
-            attrs={
-                "class": "form-control mb-3",
-                "placeholder": "phone-number",
-                "id": "form-phone-number"
-            }
-        ))
-    postcode = forms.CharField(
-        label="Postcode", min_length=4, max_length=10, widget=forms.TextInput(
-            attrs={
-                "class": "form-control mb-3",
-                "placeholder": "Postcode",
-                "id": "form-postcode"
-            }
-        ))
-    address_1 = forms.CharField(
-        label="Address 1", min_length=4, max_length=100, widget=forms.TextInput(
-            attrs={
-                "class": "form-control mb-3",
-                "placeholder": "Address-1",
-                "id": "form-address-1"
-            }
-        ))
-    address_2 = forms.CharField(
-        label="Address 2", min_length=0, max_length=100, widget=forms.TextInput(
-            attrs={
-                "class": "form-control mb-3",
-                "placeholder": "Address-2",
-                "id": "form-address-2"
-            }
-        ))
-    city = forms.CharField(
-        label="City", min_length=2, max_length=50, widget=forms.TextInput(
-            attrs={
-                "class": "form-control mb-3",
-                "placeholder": "City",
-                "id": "form-city"
-            }
-        ))
 
     class Meta:
         model = Customer
-        fields = ("email", "user_name", "first_name", "surname", "about", "country", "phone_number", "postcode",
-                  "address_1", "address_2", "city",)
+        fields = ("email", "user_name", "first_name", "surname")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["user_name"].required = True
         self.fields["email"].required = True
+        self.fields["first_name"].widget.attrs.update(
+            {"class": "form-control mb-2 account-form", "placeholder": "First Name"}
+        )
+        self.fields["surname"].widget.attrs.update(
+            {"class": "form-control mb-2 account-form", "placeholder": "Surname"}
+        )
 
 
 class UserAddressForm(forms.ModelForm):
