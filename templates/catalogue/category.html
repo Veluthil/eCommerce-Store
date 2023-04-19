@@ -13,7 +13,7 @@ Products
         <h1 class="h2">{{ category.name|title }}</h1>
     </div>
     <div class="col-12 d-flex justify-content-between">
-        <div><b>Popular</b> products in our Shop.</div>
+        <div>Popular <b>{{ category.name }}</b> in our Shop.</div>
     </div>
     <hr/>
 </div>
@@ -27,15 +27,17 @@ Products
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
                 {% for product in products %}
                 <div class="col">
-                    <div class="card border-0">
+                    <div class="card border-0 p-2 bg-body-tertiary">
                         {% for image in product.product_image.all %}
                         {% if image.is_feature %}
+                        <a href="{{ product.get_absolute_url }}">
                         <img class="img-fluid" src="{{ image.image.url }}" alt="{{ image.image.alt_text }}">
+                        </a>
                         {% endif %}
                         {% endfor %}
                         <div class="card-body px-0">
                             <p class="card-text">
-                                <a class="text-dark text-decoration-none" href="{{ product.get_absolute_url }}">
+                                <a class="text-decoration-none text-reset" href="{{ product.get_absolute_url }}">
                                     {{ product.title }}</a>
                             </p>
                             <div class="d-flex justify-content-between align-items-center">

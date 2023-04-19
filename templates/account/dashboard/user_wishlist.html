@@ -26,10 +26,12 @@ Your Wish List
             </div>
             <div class="col-md-10">
                 <div class="card-body">
+                    <a  href="{{product.get_absolute_url}}" class="text-decoration-none text-reset">
                     <h5 class="card-title">{{product.title}}</h5>
+                    </a>
                     <p class="card-text">{{product.description}}</p>
                     <p class="card-text"><small class="text-muted">${{product.regular_price}}</small></p>
-                    <a type="button" class="btn btn-primary fw500 btn-sm"
+                    <a type="button" class="btn btn-danger fw500 btn-sm"
                        href="{% url 'account:user_wishlist' product.id %}">Remove from Wishlist</a>
                 </div>
             </div>

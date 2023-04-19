@@ -3,20 +3,18 @@
 
 {% block content %}
 
-<section class="py-2 text-center container">
-    <div class="row py-lg-4">
-        <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light">Dokushou Vernissage</h1>
-            <p class="lead text-body-secondary">Place where you can find your art and musings.</p>
-            {% if not user.is_authenticated %}
-            <p>
-                <a href="{% url 'account:login' %}" class="btn btn-primary my-2">Create an account</a>
-                <a href="{% url 'account:register' %}" class="btn btn-secondary my-2">Login and explore</a>
-            </p>
-            {% endif %}
-        </div>
+<div class="position-relative overflow-hidden p-3 p-md-3 m-md-3 text-center bg-body-tertiary">
+    <div class="col-md-5 p-lg-5 mx-auto my-2">
+      <h1 class=" fw-normal">Dokushou Vernissage</h1>
+      <p class="lead fw-normal">Discover and possess your dreams.</p>
+        {% if not user.is_authenticated %}
+      <a class="btn btn-outline-secondary" href="{% url 'account:register' %}">Start Journey</a>
+        <a class="btn btn-outline-danger" href="{% url 'account:login' %}">Resume Journey</a>
+        {% endif %}
     </div>
-</section>
+    <div class="product-device shadow-sm d-none d-md-block"></div>
+    <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+  </div>
 
 <div class="container">
     <!--    <div class="alert alert-primary fw600 rounded-0 border-0 pb-3" role="alert">-->
@@ -42,20 +40,21 @@
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
                     {% for product in products %}
                     <div class="col">
-                        <div class="card border-0">
+                        <div class="card border-0 p-2 bg-body-tertiary">
                             {% for image in product.product_image.all %}
                             {% if image.is_feature %}
                             <a href="{{ product.get_absolute_url }}">
-                            <img class="img-fluid" src="{{ image.image.url }}" alt="{{ image.image.alt_text }}"></a>
+                                <img class="img-fluid" src="{{ image.image.url }}" alt="{{ image.image.alt_text }}"></a>
                             {% endif %}
                             {% endfor %}
 
                             <div class="card-body px-0">
                                 <p class="card-title">
-                                    <p class="fw-bold">{{ product.title|slice:":50" }}</p>
+                                    <a class="text-decoration-none text-reset" href="{{ product.get_absolute_url }}">
+                                    <p class="fw-bold"> {{ product.title|slice:":50" }}</p></a>
                                 </p>
                                 <p class="card-text">{{ product.description|slice:":50" }}</p>
-                                <div class="fw-bold">${{product.regular_price}}</div>
+                                <div class="fw-bold">${{ product.regular_price }}</div>
                             </div>
                         </div>
                     </div>

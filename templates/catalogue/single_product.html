@@ -22,7 +22,7 @@ Product
         <div class="col-md-5 ps-3 col-lg-5 order-md-last p-0 order-1">
             <div class="d-grid gap-2">
                 <div class="d-block mb-5">
-                <h2><span>{{product.title}}</span> </h2>
+                    <h2><span>{{product.title}}</span></h2>
                     <h5>{{product.description}}</h5>
                 </div>
                 <div class="d-flex d-flex-inline justify-content-between">
@@ -54,9 +54,10 @@ Product
             <div class="card mb-3 border-0">
                 <div class="row g-0">
                     <div class="col-md-12">
-                        <div class="card-body p-1">
-<!--                            <h1 class="mb-0 h2 pe-4 pb-4">{{ product.title }}</h1>-->
-                            <div id="carouselExampleIndicators" class="carousel slide carousel-dark">
+                        <div class="card-body p-1 mb-5">
+                            <!--                            <h1 class="mb-0 h2 pe-4 pb-4">{{ product.title }}</h1>-->
+                            <div id="carouselExampleIndicators" class="carousel slide carousel-dark bg-body-tertiary
+                             rounded-3 p-2">
                                 <div class="carousel-indicators">
                                     <button type="button" data-bs-target="#carouselExampleIndicators"
                                             data-bs-slide-to="0" class="active" aria-current="true"
@@ -66,7 +67,7 @@ Product
                                     <button type="button" data-bs-target="#carouselExampleIndicators"
                                             data-bs-slide-to="2" aria-label="Slide 3"></button>
                                 </div>
-                                <div class="carousel-inner" >
+                                <div class="carousel-inner">
                                     {% for image in product.product_image.all %}
                                     {% if image.is_feature %}
                                     <div class="carousel-item active">
@@ -93,12 +94,18 @@ Product
                                 </button>
                             </div>
                         </div>
+
+                        <div class="col-md-12">
+                            <div class="h-100 p-5 rounded-3 bg-body-tertiary">
+                                <h2>Product Description</h2>
+                                <p>{{ product.description_detailed }}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 
 
@@ -120,14 +127,6 @@ Product
             error: function (xhr, errmsg, err) {}
         });
     })
-
-
-
-
-
-
-
-
 </script>
 
 {% endblock %}
