@@ -5,7 +5,7 @@ Edit Profile
 {% block sub_content %}
 
 <div class="col-6 mx-auto">
-<form class="account-form" method="post" enctype="multipart/form-data">
+<form name="account_form" class="account-form" method="post" enctype="multipart/form-data">
     {% if user_form.is_valid %}
     <div class="alert alert-primary" role="alert">
         Details successfully updated!
@@ -31,19 +31,8 @@ Edit Profile
     {{ user_form.first_name }}
     <label class="small font-weight-bold">{{ user_form.surname.label}}</label>
     {{ user_form.surname }}
-    <label class="small font-weight-bold">{{ user_form.country.label}}</label>
-    {{ user_form.country }}
-    <label class="small font-weight-bold">{{ user_form.phone_number.label}}</label>
-    {{ user_form.phone_number }}
-    <label class="small font-weight-bold">{{ user_form.postcode.label}}</label>
-    {{ user_form.postcode }}
-    <label class="small font-weight-bold">{{ user_form.address_1.label}}</label>
-    {{ user_form.address_1 }}
-    <label class="small font-weight-bold">{{ user_form.address_2.label}}</label>
-    {{ user_form.address_2 }}
-    <label class="small font-weight-bold">{{ user_form.city.label}}</label>
-    {{ user_form.city }}
-    <button class="btn btn-primary btn-block py-2 mb-4 mt-5 fw-bold w-100" type="submit" value="Save changes">
+    <button class="btn btn-primary btn-block py-2 mb-4 mt-5 fw-bold w-100" type="submit" value="Save changes"
+    onclick="submitForm()">
         Save Changes
     </button>
     <hr class="mb-3">
@@ -57,5 +46,14 @@ Edit Profile
     </button>
 </form>
 </div>
+
+<script>
+function submitForm() {
+   var form = document.getElementsByName('account_form')[0];
+   form.submit(); // Submit the form
+   form.reset();  // Reset all form data
+   return false; // Prevent page refresh
+}
+</script>
 
 {% endblock %}
