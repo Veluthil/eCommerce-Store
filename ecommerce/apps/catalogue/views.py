@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 
 from .models import Category, Product
@@ -18,3 +19,10 @@ def category_list(request, slug):
     products = Product.objects.filter(
         category__in=Category.objects.get(name=slug).get_descendants(include_self=True))
     return render(request, "catalogue/category.html", {"category": category, "products": products})
+
+
+def set_theme(request):
+    theme = request.POST.get('theme', 'light')
+    request.session['theme'] = theme
+    request.session.modified = True
+    return JsonResponse({'status': 'ok'})
