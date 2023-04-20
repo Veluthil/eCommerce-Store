@@ -3,210 +3,246 @@
 <html>
 
 <head>
-  <meta charset="utf-8"/>
-  <title>{% block title %}DokushouVernissage{% endblock %}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"
-          integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
-          crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-          integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-          crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-          integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-          crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="{% static 'core/css/base.css' %}">
-  <link rel="stylesheet" href="{% block stylesheet %}{% endblock %}">
+    <meta charset="utf-8"/>
+    <title>{% block title %}DokushouVernissage{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+            integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+            crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'core/css/base.css' %}">
+    <link rel="stylesheet" href="{% block stylesheet %}{% endblock %}">
 </head>
 
 <body>
 <header class="pb-3">
-  <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
-    <div class="container-fluid px-md-4">
-      <div class="d-flex w-100 navbar-collapse">
-        <a class="navbar-brand d-flex-inline" href="/">
-          <h4><a class="navbar-brand fw-bold" href="/">DokushouVernissage</a></h4>
-        </a>
-        <ul class="navbar-nav me-auto mb-2 mb-md-0">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle d-none d-md-block fw500" href="#" id="navbarDropdown"
-               role="button"
-               data-bs-toggle="dropdown" aria-expanded="false">
-              All
-              <i class="ps-1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                     class="bi bi-chevron-down" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-                </svg>
-              </i>
-            </a>
-            <ul class="dropdown-menu rounded-0 border-0" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="{% url 'catalogue:catalogue_home' %}">All</a></li>
-              {% for c in categories %}
-              {% if category.slug == c.slug %}
-              <li class="selected">
-                <a class="dropdown-item" href="{{ c.get_absolute_url }}">{{ c.name|title }}</a>
-              </li>
-              {% endif %}
-              {% endfor %}
-            </ul>
-          </li>
-        </ul>
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
-                aria-label="Toggle navigation">
-          <div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
-                 class="bi bi-list"
-                 viewBox="0 0 16 16">
-              <path fill-rule="evenodd"
-                    d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-            </svg>
-          </div>
-          <span class="fs15 fw500">Shop</span>
-        </button>
-        <div>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent2">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-reset" href="#" id="navbarDropdown"
-                   role="button"
-                   data-bs-toggle="dropdown" aria-expanded="false">
-                  <div class="small text-muted">
-                    {% if user.is_authenticated %}
-                    Hello, {{ request.user.name }}
-                    {% else %}
-                    Login
-                    {% endif %}
-                  </div>
-                  <span class="fs15 fw500">Account &amp; Lists
-                    </span>
+    <nav class="navbar navbar-expand-md border-bottom">
+        <div class="container-fluid px-md-4">
+            <div class="d-flex w-100 navbar-collapse">
+                <a class="navbar-brand d-flex-inline" href="/">
+                    <h4><a class="navbar-brand fw-bold" href="/">DokushouVernissage</a></h4>
                 </a>
-                <div class="dropdown-menu rounded-0" aria-labelledby="navbarDropdown">
-                  <div class="card border-0">
-                    <div class="card-body">
-                      <h6 class="card-title fw-bold">My Account</h6>
-                      <ul class="list-group list-group-flush dropdown-account-link">
-                        {% if user.is_authenticated %}
-                        <a href="{% url 'account:dashboard' %}" class="text-reset small
-                                                list-group-item p-0 pb-1 border-0 dropdown-account-link">Your
-                          Account</a>
-                        <a href="{% url 'account:user_orders' %}"
-                               class="text-reset small list-group-item p-0 pb-1 border-0 dropdown-account-link">Orders</a>
-                        <a href="{% url 'account:logout' %}" class="text-reset small
-                                                list-group-item p-0 pb-1 border-0 dropdown-account-link">Logout</a>
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-none d-md-block fw500" href="#" id="navbarDropdown"
+                           role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            All
+                            <i class="ps-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                          d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                                </svg>
+                            </i>
+                        </a>
+                        <ul class="dropdown-menu rounded-0 border-0" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'catalogue:catalogue_home' %}">All</a></li>
+                            {% for cat in categories %}
+                            {% if category.slug == c.slug %}
+                            <li class="selected">
+                                <a class="dropdown-item" href="{{ cat.get_absolute_url }}">{{ cat.name|title }}</a>
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+                <button id="btnSwitch" type="button" class="btn">
+                    <div>
+                        {% if request.session.theme == "light" %}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                             class="bi bi-moon-stars" viewBox="0 0 16 16">
+                            <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278zM4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z"/>
+                            <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
+                        </svg>
                         {% else %}
-                        <a href="{% url 'account:login' %}" class="text-reset small
-                                                list-group-item p-0 pb-1 border-0 dropdown-account-link">Login</a>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                             class="bi bi-brightness-high" viewBox="0 0 16 16">
+                            <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+                        </svg>
                         {% endif %}
-                      </ul>
                     </div>
-                  </div>
+                </button>
+                <div>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent2">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-reset" href="#" id="navbarDropdown"
+                                   role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                    <div class="small text-muted">
+                                        {% if user.is_authenticated %}
+                                        Hello, {{ request.user.name }}
+                                        {% else %}
+                                        Login
+                                        {% endif %}
+                                    </div>
+                                    <span class="fs15 fw500">Account &amp; Lists
+                    </span>
+                                </a>
+                                <div class="dropdown-menu rounded-0" aria-labelledby="navbarDropdown">
+                                    <div class="card border-0">
+                                        <div class="card-body">
+                                            <h6 class="card-title fw-bold">My Account</h6>
+                                            <ul class="list-group list-group-flush dropdown-account-link">
+                                                {% if user.is_authenticated %}
+                                                <a href="{% url 'account:dashboard' %}" class="text-reset small
+                                                list-group-item p-0 pb-1 border-0 dropdown-account-link">Your
+                                                    Account</a>
+                                                <a href="{% url 'account:user_orders' %}"
+                                                   class="text-reset small list-group-item p-0 pb-1 border-0 dropdown-account-link">Orders</a>
+                                                <a href="{% url 'account:logout' %}" class="text-reset small
+                                                list-group-item p-0 pb-1 border-0 dropdown-account-link">Logout</a>
+                                                {% else %}
+                                                <a href="{% url 'account:login' %}" class="text-reset small
+                                                list-group-item p-0 pb-1 border-0 dropdown-account-link">Login</a>
+                                                {% endif %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-              </li>
-            </ul>
-          </div>
+                <a type="button" role="button" href="{% url 'basket:basket_summary' %}"
+                   class="btn btn-outline-secondary border-0 basket-btn">
+                    {% with total_qty=basket|length %}
+                    <div id="basket-qty" class="basket-qty">
+                        {% if total_qty > 0 %}
+                        {{ total_qty }}
+                        {% else %}
+                        0
+                        {% endif %}
+                    </div>
+                    {% endwith %}
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                             class="bi bi-cart3"
+                             viewBox="0 0 16 16">
+                            <path
+                                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                        </svg>
+                    </div>
+                    <span class="fs15 fw500">Basket</span>
+                </a>
+            </div>
+            <div class="d-md-none d-lg-none d-xl-none">
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li><a class="dropdown-item fw-bold" href="{% url 'catalogue:catalogue_home' %}">All</a></li>
+                        {% for c in categories %}
+                        {% if category.slug == c.slug %}
+                        <li class="selected">
+                            <a class="dropdown-item" href="{{ c.get_absolute_url }}">{{ c.name|title }}</a>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                    <h6 class="card-title fw-bold">My Account</h6>
+                    <ul class="list-group list-group-flush dropdown-account-link">
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'account:dashboard' %}" class="dropdown-item">Your Account</a>
+                        <a href="{% url 'account:user_orders' %}" class="dropdown-item">Orders</a>
+                        <a href="{% url 'account:logout' %}" class="dropdown-item">Logout</a>
+                        {% else %}
+                        <a href="{% url 'account:login' %}" class="dropdown-item">Login</a>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+            <form class="d-flex w-100 d-md-none">
+                <input class="form-control me-2" type="search" placeholder="Search products or FAQ" aria-label="Search">
+                <button class="btn btn-outline-secondary" type="submit">Search</button>
+            </form>
         </div>
-        <a type="button" role="button" href="{% url 'basket:basket_summary' %}"
-           class="btn btn-outline-secondary border-0 basket-btn">
-          {% with total_qty=basket|length %}
-          <div id="basket-qty" class="basket-qty">
-            {% if total_qty > 0 %}
-            {{ total_qty }}
-            {% else %}
-            0
-            {% endif %}
-          </div>
-          {% endwith %}
-          <div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
-                 class="bi bi-cart3"
-                 viewBox="0 0 16 16">
-              <path
-                      d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-            </svg>
-          </div>
-          <span class="fs15 fw500">Basket</span>
-        </a>
-      </div>
-      <div class="d-md-none d-lg-none d-xl-none">
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li><a class="dropdown-item fw-bold" href="{% url 'catalogue:catalogue_home' %}">All</a></li>
-            {% for c in categories %}
-            {% if category.slug == c.slug %}
-            <li class="selected">
-              <a class="dropdown-item" href="{{ c.get_absolute_url }}">{{ c.name|title }}</a>
-            </li>
-            {% endif %}
-            {% endfor %}
-          </ul>
-          <h6 class="card-title fw-bold">My Account</h6>
-          <ul class="list-group list-group-flush dropdown-account-link">
-            {% if user.is_authenticated %}
-            <a href="{% url 'account:dashboard' %}" class="dropdown-item">Your Account</a>
-            <a href="{% url 'account:user_orders' %}" class="dropdown-item">Orders</a>
-            <a href="{% url 'account:logout' %}" class="dropdown-item">Logout</a>
-            {% else %}
-            <a href="{% url 'account:login' %}" class="dropdown-item">Login</a>
-            {% endif %}
-          </ul>
-        </div>
-      </div>
-      <form class="d-flex w-100 d-md-none">
-        <input class="form-control me-2" type="search" placeholder="Search products or FAQ" aria-label="Search">
-        <button class="btn btn-outline-secondary" type="submit">Search</button>
-      </form>
-    </div>
-  </nav>
+    </nav>
 </header>
 
 <main class="pt-5">
-  <div id="content">{% block content %} {% endblock %}</div>
+    <div id="content">{% block content %} {% endblock %}</div>
 </main>
 
 <footer class="container py-5 footer">
-  <hr>
-  <div class="row pt-4">
-    <div class="col-3 fs15">
-      <h5 class="fw-bold">Dokushou</h5>
-      <h5 class="fw-bold">Vernissage</h5>
-      <small class="d-block mb-3 text-muted">&copy; 2023</small>
+    <hr>
+    <div class="row pt-4">
+        <div class="col-3 fs15">
+            <h5 class="fw-bold">Dokushou</h5>
+            <h5 class="fw-bold">Vernissage</h5>
+            <small class="d-block mb-3 text-muted">&copy; 2023</small>
+        </div>
+        <div class="col-3 col-md fs15">
+            <h5>Information</h5>
+            <ul class="list-unstyled">
+                <li><a class="link-secondary text-decoration-none" href="#">Cool stuff</a></li>
+                <li><a class="link-secondary text-decoration-none" href="#">Random feature</a></li>
+                <li><a class="link-secondary text-decoration-none" href="#">Team feature</a></li>
+                <li><a class="link-secondary text-decoration-none" href="#">Stuff for developers</a></li>
+                <li><a class="link-secondary text-decoration-none" href="#">Another one</a></li>
+                <li><a class="link-secondary text-decoration-none" href="#">Last time</a></li>
+            </ul>
+        </div>
+        <div class="col-3 col-md fs15">
+            <h5>About Us</h5>
+            <ul class="list-unstyled">
+                <li><a class="link-secondary text-decoration-none" href="#">Resource name</a></li>
+                <li><a class="link-secondary text-decoration-none" href="#">Resource</a></li>
+                <li><a class="link-secondary text-decoration-none" href="#">Another resource</a></li>
+                <li><a class="link-secondary text-decoration-none" href="#">Final resource</a></li>
+            </ul>
+        </div>
+        <div class="col-3 col-md fs15">
+            <h5>FAQ</h5>
+            <ul class="list-unstyled">
+                <li><a class="link-secondary text-decoration-none" href="#">Team</a></li>
+                <li><a class="link-secondary text-decoration-none" href="#">Locations</a></li>
+                <li><a class="link-secondary text-decoration-none" href="#">Privacy</a></li>
+                <li><a class="link-secondary text-decoration-none" href="#">Terms</a></li>
+            </ul>
+        </div>
     </div>
-    <div class="col-3 col-md fs15">
-      <h5>Features</h5>
-      <ul class="list-unstyled">
-        <li><a class="link-secondary text-decoration-none" href="#">Cool stuff</a></li>
-        <li><a class="link-secondary text-decoration-none" href="#">Random feature</a></li>
-        <li><a class="link-secondary text-decoration-none" href="#">Team feature</a></li>
-        <li><a class="link-secondary text-decoration-none" href="#">Stuff for developers</a></li>
-        <li><a class="link-secondary text-decoration-none" href="#">Another one</a></li>
-        <li><a class="link-secondary text-decoration-none" href="#">Last time</a></li>
-      </ul>
-    </div>
-    <div class="col-3 col-md fs15">
-      <h5>Resources</h5>
-      <ul class="list-unstyled">
-        <li><a class="link-secondary text-decoration-none" href="#">Resource name</a></li>
-        <li><a class="link-secondary text-decoration-none" href="#">Resource</a></li>
-        <li><a class="link-secondary text-decoration-none" href="#">Another resource</a></li>
-        <li><a class="link-secondary text-decoration-none" href="#">Final resource</a></li>
-      </ul>
-    </div>
-    <div class="col-3 col-md fs15">
-      <h5>About</h5>
-      <ul class="list-unstyled">
-        <li><a class="link-secondary text-decoration-none" href="#">Team</a></li>
-        <li><a class="link-secondary text-decoration-none" href="#">Locations</a></li>
-        <li><a class="link-secondary text-decoration-none" href="#">Privacy</a></li>
-        <li><a class="link-secondary text-decoration-none" href="#">Terms</a></li>
-      </ul>
-    </div>
-  </div>
 </footer>
 </body>
 
 </html>
+
+<script>
+    document.getElementById('btnSwitch').addEventListener('click',()=>{
+    if (document.documentElement.getAttribute('data-bs-theme') == 'dark') {
+        document.documentElement.setAttribute('data-bs-theme', 'light');
+        setTheme('light');
+    } else {
+        document.documentElement.setAttribute('data-bs-theme', 'dark');
+        setTheme('dark');
+    }
+});
+
+function setTheme(theme) {
+    var post = 'post';
+    $.ajax({
+        url: '{% url "catalogue:set_theme" %}',
+        type: 'POST',
+        data: {
+            theme: theme,
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+            action: post,
+        },
+        success: function(data) {
+            console.log('Theme saved:', theme);
+        }
+    });
+}
+
+$(document).ready(function() {
+    var theme = '{{ request.session.theme }}';
+    document.documentElement.setAttribute('data-bs-theme', theme);
+});
+
+
+
+</script>
