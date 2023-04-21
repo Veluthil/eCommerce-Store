@@ -8,7 +8,7 @@ class UserLoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(
         attrs={
             "class": "form-control mb-3",
-            "placeholder": "Username",
+            "placeholder": "Email",
             "id": "login-username",
         }
     ))
@@ -102,18 +102,12 @@ class UserEditForm(forms.ModelForm):
 
     class Meta:
         model = Customer
-        fields = ("email", "user_name", "first_name", "surname")
+        fields = ["email", "user_name", "first_name", "surname"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["user_name"].required = True
         self.fields["email"].required = True
-        self.fields["first_name"].widget.attrs.update(
-            {"class": "form-control mb-2 account-form", "placeholder": "First Name"}
-        )
-        self.fields["surname"].widget.attrs.update(
-            {"class": "form-control mb-2 account-form", "placeholder": "Surname"}
-        )
 
 
 class UserAddressForm(forms.ModelForm):
