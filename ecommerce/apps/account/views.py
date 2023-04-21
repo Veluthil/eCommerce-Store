@@ -31,6 +31,7 @@ def account_register(request):
         if register_form.is_valid():
             user = register_form.save(commit=False)
             user.email = register_form.cleaned_data["email"]
+            user.name = register_form.cleaned_data["name"]
             user.set_password(register_form.cleaned_data["password"])
             user.is_active = False
             user.save()
