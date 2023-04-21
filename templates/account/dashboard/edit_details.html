@@ -5,55 +5,52 @@ Edit Profile
 {% block sub_content %}
 
 <div class="col-6 mx-auto">
-<form name="account_form" class="account-form" method="post" enctype="multipart/form-data">
-    {% if user_form.is_valid %}
-    <div class="alert alert-primary" role="alert">
-        Details successfully updated!
+    <form class="account-form" method="post" enctype="multipart/form-data">
+        {% if user_form.is_valid %}
+        <div class="alert alert-primary" role="alert">
+            Details successfully updated!
+        </div>
+        <p class="small text-center pt-0">
+            <a href="{% url 'account:dashboard' %}">Back to Dashboard</a>
+        </p>
+        {%else%}
+        <h3>Change your details</h3>
+        <p>You can edit your account using the following form:</p>
+        {% endif %}
+        {% if form.errors %}
+        <div class="alert alert-primary" role="alert">
+            Error: Please try again!
+        </div>
+        {% endif %}
+        {% csrf_token %}
+        <label class="small font-weight-bold">{{ user_form.email.label}}</label>
+        {{ user_form.email }}
+        <label class="small font-weight-bold">{{ user_form.first_name.label}}</label>
+        {{ user_form.first_name }}
+        <label class="small font-weight-bold">{{ user_form.surname.label}}</label>
+        {{ user_form.surname }}
+        <button class="btn btn-success btn-block py-2 mb-4 mt-5 fw-bold w-100" type="submit" value="Save changes">Save
+            Changes
+        </button>
+        <hr class="mb-3">
+    </form>
+    <div class="flex-column justify-content-center mx-auto pb-3">
+        <p class=" h3 pt-4 font-weight-bold">Change Password</p>
+        <p>Do you want to change your password?</p>
+        <a class="text-decoration-none text-reset"
+           href="{% url 'account:pwdreset' %}">
+            <button role="button" class="btn btn-success btn-block py-2 mb-4 mt-5 fw-bold w-100">Change password
+        </button></a>
     </div>
-    <p class="small text-center pt-0">
-        <a href="{% url 'account:dashboard' %}">Back to Dashboard</a>
-    </p>
-    {%else%}
-    <h3 class="fw-bold">Change your account's details</h3>
-    <p>You can edit your account using the following form:</p>
-    {% endif %}
-    {% if form.errors %}
-    <div class="alert alert-primary" role="alert">
-        Error: Please try again!
-    </div>
-    {% endif %}
-    {% csrf_token %}
-    <label class="small font-weight-bold">{{ user_form.email.label}}</label>
-    {{ user_form.email }}
-    <label class="small font-weight-bold">{{ user_form.user_name.label}}</label>
-    {{ user_form.user_name }}
-    <label class="small font-weight-bold">{{ user_form.first_name.label}}</label>
-    {{ user_form.first_name }}
-    <label class="small font-weight-bold">{{ user_form.surname.label}}</label>
-    {{ user_form.surname }}
-    <button class="btn btn-primary btn-block py-2 mb-4 mt-5 fw-bold w-100" type="submit" value="Save changes"
-    onclick="submitForm()">
-        Save Changes
-    </button>
     <hr class="mb-3">
-</form>
-<form class="account-form" action="{% url 'account:delete_user' %}" method="post">
-    {% csrf_token %}
-    <p class="h3 pt-4 font-weight-bold">Delete Account</p>
-    <p>Are you sure you want to delete your account?</p>
-    <button type="submit" role="button" class="btn btn-danger btn-block mb-4 mt-3 fw-bold w-100">
-        Delete
-    </button>
-</form>
+    <form class="account-form" action="{% url 'account:delete_user' %}" method="post">
+        {% csrf_token %}
+        <p class=" h3 pt-4 font-weight-bold">Delete Account</p>
+        <p>Are you sure you want to delete your account? There's no going back.</p>
+        <button type="submit" role="button" class="btn btn-danger btn-block py-2 mb-4 mt-5 fw-bold w-100">Delete
+        </button>
+    </form>
 </div>
 
-<script>
-function submitForm() {
-   var form = document.getElementsByName('account_form')[0];
-   form.submit(); // Submit the form
-   form.reset();  // Reset all form data
-   return false; // Prevent page refresh
-}
-</script>
 
 {% endblock %}
