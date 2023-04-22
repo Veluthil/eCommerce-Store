@@ -58,7 +58,7 @@ Basket Summary
                 <div class="row g-0">
                     <div class="col">
                         <div class="card pb-3 rounded-0">
-                            <div class="card-header bg-white small text-muted">
+                            <div class="card-header bg-tertiary small text-muted">
                                 {% if address.default %}
                                 Selected
                                 {% endif %}
@@ -73,10 +73,10 @@ Basket Summary
                                 <p class="card-text m-0">Phone number: {{address.phone}}</p>
                                 <div class="pt-5">
                                     <a href="{% url 'account:edit_address' address.id %}"
-                                       class="text-decoration-none">Edit</a>
+                                       class="text-decoration-none text-reset">Edit</a>
                                     {% if not address.default %}
                                     | <a href="{% url 'account:set_default' address.id %}"
-                                         class="text-decoration-none">Select</a>
+                                         class="text-decoration-none text-reset">Select</a>
                                     {% endif %}
                                 </div>
                             </div>

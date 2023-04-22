@@ -37,14 +37,14 @@
                 {% if not products %}
                 <div class="col-12">Currently we have no active products. Sorry.</div>
                 {% else %}
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+                <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3">
                     {% for product in products %}
                     <div class="col">
                         <div class="card border-0 p-2 bg-body-tertiary">
                             {% for image in product.product_image.all %}
                             {% if image.is_feature %}
                             <a href="{{ product.get_absolute_url }}">
-                                <img class="img-fluid" src="{{ image.image.url }}" alt="{{ image.image.alt_text }}"></a>
+                                <img class="card-img-top" src="{{ image.image.url }}" alt="{{ image.image.alt_text }}"></a>
                             {% endif %}
                             {% endfor %}
 
