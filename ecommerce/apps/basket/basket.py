@@ -68,10 +68,14 @@ class Basket:
     def add(self, product, product_qty):
         """Add and update the dashboard's basket session data."""
         product_id = str(product.id)
-        if product_id in self.basket:
-            self.basket[product_id]["qty"] = product_qty
+        product_cat = str(product.category)
+        if product_cat != "art":
+            if product_id in self.basket:
+                self.basket[product_id]["qty"] = product_qty
+            else:
+                self.basket[product_id] = {"price": str(product.regular_price), "qty": int(product_qty)}
         else:
-            self.basket[product_id] = {"price": str(product.regular_price), "qty": int(product_qty)}
+            self.basket[product_id] = {"price": str(product.regular_price), "qty": 1}
         self.save_session()
 
     def delete(self, product):
@@ -81,11 +85,14 @@ class Basket:
             del self.basket[product_id]
             self.save_session()
 
-    def update(self, product, qty):
+    def update(self, product, qty, category):
         """Update item in the session by its ID and selected quantity."""
         product_id = str(product)
-        if product_id in self.basket:
-            self.basket[product_id]["qty"] = qty
+        if category != "art":
+            if product_id in self.basket:
+                self.basket[product_id]["qty"] = qty
+        else:
+            self.basket[product_id]["qty"] = "1"
         self.save_session()
 
     def clear(self):

@@ -156,10 +156,60 @@
                     </ul>
                 </div>
             </div>
-<!--            <form class="d-flex w-100 d-md-none">-->
-<!--                <input class="form-control me-2" type="search" placeholder="Search products or FAQ" aria-label="Search">-->
-<!--                <button class="btn btn-outline-secondary" type="submit">Search</button>-->
-<!--            </form>-->
+            <div class="d-flex w-100 d-md-none">
+                <nav class="navbar navbar-expand-lg">
+                    <div class="container-fluid">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                            <ul class="navbar-nav">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                       aria-expanded="false">
+                                        Shop - Categories
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="{% url 'catalogue:catalogue_home' %}">All</a>
+                                        </li>
+                                        {% for cat in categories %}
+                                        {% if category.slug == c.slug %}
+                                        <li class="selected">
+                                            <a class="dropdown-item" href="{{ cat.get_absolute_url }}">{{ cat.name|title }}</a>
+                                        </li>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                       aria-expanded="false">
+                                        Account
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <ul class="list-group list-group-flush dropdown-account-link">
+                                                {% if user.is_authenticated %}
+                                                <a href="{% url 'account:dashboard' %}" class="text-reset small
+                                                list-group-item p-0 pb-1 border-0 dropdown-account-link">Your
+                                                    Account</a>
+                                                <a href="{% url 'account:user_orders' %}"
+                                                   class="text-reset small list-group-item p-0 pb-1 border-0 dropdown-account-link">Orders</a>
+                                                <a href="{% url 'account:logout' %}" class="text-reset small
+                                                list-group-item p-0 pb-1 border-0 dropdown-account-link">Logout</a>
+                                                {% else %}
+                                                <a href="{% url 'account:login' %}" class="text-reset small
+                                                list-group-item p-0 pb-1 border-0 dropdown-account-link">Login</a>
+                                                {% endif %}
+                                            </ul>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
         </div>
     </nav>
 </header>
@@ -242,6 +292,18 @@ $(document).ready(function() {
     var theme = '{{ request.session.theme }}';
     document.documentElement.setAttribute('data-bs-theme', theme);
 });
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

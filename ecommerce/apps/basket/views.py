@@ -39,7 +39,9 @@ def basket_update(request):
     if request.POST.get("action") == "post":
         product_id = int(request.POST.get("productid"))
         product_qty = int(request.POST.get("productqty"))
-        basket.update(product=product_id, qty=product_qty)
+        product = get_object_or_404(Product, id=product_id)
+        product_cat = str(product.category)
+        basket.update(product=product_id, qty=product_qty, category=product_cat)
 
         basket_qty = basket.__len__()
         basket_total = basket.get_subtotal()
