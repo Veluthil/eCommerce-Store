@@ -18,14 +18,16 @@ Log in
     <label class="form-label">{{ form.password.label}}</label>
     {{ form.password}}
     <div class="d-grid gap-2">
-    <input type="hidden" name="next" value="{{ next }}">
-    <button class="btn btn-primary py-2 mb-4 mt-5 fw-bold" type="submit" value="Log-in">Sign in
-    </button>
-  </div>
-  <div class="flex-column justify-content-center mx-auto pb-3">
-    <div class="text-center"><a href="{% url 'account:register' %}">Create an Account</a></div>
-    <div class="text-center"><a href="{% url 'account:pwdreset' %}">Forgotten Password?</a></div>
-  </div>
+        <input type="hidden" name="next" value="{{ next }}">
+        <button class="btn btn-success py-2 mb-4 mt-5 fw-bold" type="submit" value="Log-in">Sign in
+        </button>
+    </div>
+    <div class="flex-column justify-content-center mx-auto pb-3">
+        <div class="text-center"><a class="text-reset" href="{% url 'account:register' %}">Create
+            an Account</a></div>
+        <div class="text-center"><a class="text-reset" href="{% url 'account:pwdreset' %}">Forgotten
+            Password?</a></div>
+    </div>
 </form>
 
 {% endblock %}
