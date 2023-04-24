@@ -32,11 +32,11 @@ Register
     {{ form.password }}
     <label>{{ form.password2.label}}<span class="text-muted small">(Required)</span></label>
     {{ form.password2 }}
-    <button class="btn btn-primary btn-block py-2 mb-4 mt-5 fw500 w-100" type="submit">
+    <button class="btn btn-success btn-block py-2 mb-4 mt-5 fw500 w-100" type="submit">
         Register
     </button>
     <p class="text-center">
-        <a href="{% url 'account:login' %}">Already have an account?</a>
+        <a class="text-reset" href="{% url 'account:login' %}">Already have an account?</a>
     </p>
 </form>
 
