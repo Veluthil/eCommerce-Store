@@ -126,7 +126,7 @@ Your Basket Summary
             subtotal = 0
           }
           else{
-            total = (parseFloat(json.subtotal) + 11.50).toFixed(2);
+            total = (parseFloat(json.subtotal)).toFixed(2);
             subtotal = json.subtotal
           }
 
@@ -153,7 +153,7 @@ Your Basket Summary
       },
       success: function (json) {
 
-        total = (parseFloat(json.subtotal) + 11.50).toFixed(2);
+        total = (parseFloat(json.subtotal)).toFixed(2);
         document.getElementById("basket-qty").innerHTML = json.qty;
         document.getElementById("subtotal").innerHTML = json.subtotal;
         document.getElementById("total").innerHTML = total;
