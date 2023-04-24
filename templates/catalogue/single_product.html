@@ -20,7 +20,7 @@ Product
     {% endif %}
     <div class="row g-3">
         <div class="col-md-5 ps-3 col-lg-5 order-md-last p-0 order-1">
-            <div class="d-grid gap-2">
+            <div class="d-grid gap-2 mb-5">
                 <div class="d-block mb-5">
                     <h2><span>{{product.title}}</span></h2>
                     <h5>{{product.description}}</h5>
@@ -32,6 +32,7 @@ Product
                         <label for="select">Qty</label>
                         <select id="select" class="h6 dropdown-select-store">
                             <option value="1">1</option>
+                            {% if not product.category_id == 3 %}
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
@@ -39,6 +40,7 @@ Product
                             <option value="6">6</option>
                             <option value="7">7</option>
                             <option value="8">8</option>
+                            {% endif %}
                         </select>
                     </div>
                 </div>
