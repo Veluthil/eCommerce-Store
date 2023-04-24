@@ -17,7 +17,8 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = ['yourdomain.com', '127.0.0.1', 'localhost', 'e-commerce-store-mih910wz1-veluthil.vercel.app',
-                 'e-commerce-store-nine.vercel.app', 'e-commerce-store-git-master-veluthil.vercel.app']
+                 'e-commerce-store-nine.vercel.app', 'e-commerce-store-git-master-veluthil.vercel.app',
+                 'e-commerce-store-veluthil.vercel.app']
 
 # Application definition
 
@@ -81,7 +82,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'URL': os.getenv("POSTGRES_URL"),
-        'NAME': 'db.sqlite3',
+        'NAME': os.getenv("POSTGRES_NAME"),
         'USER': os.getenv("POSTGRES_USER"),
         'PASSWORD': os.getenv("POSTGRES_PASSWORD"),
         'HOST': os.getenv("POSTGRES_HOST"),
