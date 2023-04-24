@@ -16,7 +16,8 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['yourdomain.com', '127.0.0.1', 'localhost', 'e-commerce-store-mih910wz1-veluthil.vercel.app']
+ALLOWED_HOSTS = ['yourdomain.com', '127.0.0.1', 'localhost', 'e-commerce-store-mih910wz1-veluthil.vercel.app',
+                 'e-commerce-store-nine.vercel.app', 'e-commerce-store-git-master-veluthil.vercel.app']
 
 # Application definition
 
