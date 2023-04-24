@@ -80,6 +80,7 @@ Your Basket Summary
                             <select id="select{{product.id}}" style="width:50px;height:31px;">
                                 <option value="" selected disabled hidden>{{item.qty}}</option>
                                 <option value="1">1</option>
+                                {% if not product.category_id == 3 %}
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
@@ -87,6 +88,7 @@ Your Basket Summary
                                 <option value="6">6</option>
                                 <option value="7">7</option>
                                 <option value="8">8</option>
+                                {% endif %}
                             </select>
                             <a type="button" id="update-button" data-index="{{product.id}}"
                                class="update-button text-decoration-none text-reset small ps-3 pe-3">Update</a>
