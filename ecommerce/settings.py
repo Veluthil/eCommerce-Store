@@ -16,9 +16,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['yourdomain.com', '127.0.0.1', 'localhost', 'e-commerce-store-mih910wz1-veluthil.vercel.app',
-                 'e-commerce-store-nine.vercel.app', 'e-commerce-store-git-master-veluthil.vercel.app',
-                 'e-commerce-store-veluthil.vercel.app']
+ALLOWED_HOSTS = ['yourdomain.com', '127.0.0.1', 'localhost', '.vercel.app', '.now.sh']
 
 # Application definition
 
@@ -72,23 +70,25 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+# Production DATABASE
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'URL': os.getenv("POSTGRES_URL"),
-        'NAME': os.getenv("POSTGRES_NAME"),
-        'USER': os.getenv("POSTGRES_USER"),
-        'PASSWORD': os.getenv("POSTGRES_PASSWORD"),
-        'HOST': os.getenv("POSTGRES_HOST"),
-        'PORT': os.getenv("POSTGRES_PORT"),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+# Deployment DATABASE
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'URL': os.getenv("POSTGRES_URL"),
+#         'NAME': os.getenv("POSTGRES_NAME"),
+#         'USER': os.getenv("POSTGRES_USER"),
+#         'PASSWORD': os.getenv("POSTGRES_PASSWORD"),
+#         'HOST': os.getenv("POSTGRES_HOST"),
+#         'PORT': os.getenv("POSTGRES_PORT"),
+#     }
+# }
 
 
 # Password validation
