@@ -1,6 +1,0 @@
-Examples of credit cards' numbers for the Stripe payment
---------------------------------------------------------
-
-No auth: 4242424242424242
-Auth: 4000002500003155
-Error: 4000000000009995
