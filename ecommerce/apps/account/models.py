@@ -1,7 +1,6 @@
 import uuid
 
 from django.core.exceptions import ValidationError
-from django.core.mail import send_mail
 from django.core.validators import validate_email
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
@@ -65,15 +64,6 @@ class Customer(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.name
-
-    def email_user(self, subject, message):
-        send_mail(
-            subject,
-            message,
-            'dokushouvernissage@support.com',
-            [self.email],
-            fail_silently=False,
-        )
 
 
 class Address(models.Model):
