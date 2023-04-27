@@ -12,7 +12,7 @@ Success, password reset
         {% endif%}
         {% if 'complete' in request.get_full_path %}
         <h3 class="mb-4 fw-bold">Password Reset Successfully</h3>
-        <a href="{% url 'account:login' %}">You can log in now.</a>
+        <a class="text-reset" href="{% url 'account:login' %}">You can log in now.</a>
         {% endif%}
     </div>
 </div>
