@@ -70,14 +70,14 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# Production DATABASE
+# Production DATABASE SQLite3
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-# Deployment DATABASE
+# Deployment DATABASE PostgreSQL
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -134,13 +134,14 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #
 # MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_URL = '/media/'
+# MEDIA_ROOT = BASE_DIR / 'assets' / 'media/'
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles' / 'static'
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
+    # BASE_DIR / 'static',
+    os.path.join(BASE_DIR, "static")
 ]
 if not DEBUG:
     STATICFILES_DIRS.append(MEDIA_ROOT)
@@ -151,13 +152,17 @@ LOGIN_REDIRECT_URL = '/account/dashboard'
 LOGIN_URL = '/account/login/'
 
 # Email settings
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 25
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_HOST = 'localhost'
+# EMAIL_PORT = 25
+# Email settings for SMTP
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = False
-EMAIL_USE_SSL = False
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = os.getenv("EC_YOUR_EMAIL")
+EMAIL_HOST_PASSWORD = os.getenv("EC_PASSWORD")
 
 # Basket session ID
 BASKET_SESSION_ID = 'basket'
