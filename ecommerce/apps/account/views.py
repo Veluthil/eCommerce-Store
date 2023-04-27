@@ -1,7 +1,9 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth.decorators import login_required
+from django.core.mail import get_connection, EmailMessage
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
@@ -44,7 +46,19 @@ def account_register(request):
                 "uid": urlsafe_base64_encode(force_bytes(user.pk)),
                 "token": account_activation_token.make_token(user),
             })
-            user.email_user(subject=subject, message=message)
+            with get_connection(
+                    host=settings.EMAIL_HOST,
+                    port=settings.EMAIL_PORT,
+                    username=settings.EMAIL_HOST_USER,
+                    password=settings.EMAIL_HOST_PASSWORD,
+                    use_tls=settings.EMAIL_USE_TLS
+            ) as connection:
+                subject = subject
+                email_from = settings.EMAIL_HOST_USER
+                recipient = [user.email]
+                message = message
+                EmailMessage(subject, message, email_from, recipient, connection=connection).send()
+            # user.email_user(subject=subject, message=message)
             # print(message)
             return render(request, "account/registration/register_email_confirm.html", {"form": register_form})
         else:
