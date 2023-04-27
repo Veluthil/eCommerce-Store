@@ -133,14 +133,12 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'images' / 'media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+# MEDIA_ROOT = BASE_DIR / 'images' / 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/images/')
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles' / 'static'
 STATICFILES_DIRS = [
-    # BASE_DIR / 'static',
     os.path.join(BASE_DIR, "static")
 ]
 if not DEBUG:
@@ -151,10 +149,11 @@ AUTH_USER_MODEL = 'account.Customer'
 LOGIN_REDIRECT_URL = '/account/dashboard'
 LOGIN_URL = '/account/login/'
 
-# Email settings
+# Email settings for production
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_HOST = 'localhost'
 # EMAIL_PORT = 25
+
 # Email settings for SMTP
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
