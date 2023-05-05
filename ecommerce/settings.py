@@ -147,7 +147,7 @@ if AWS:
     AWS_LOCATION = 'static'
 
     STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'static', 'staticfiles'),
+        os.path.join(BASE_DIR, 'static'),
     ]
 
     MEDIA_URL = '//%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
