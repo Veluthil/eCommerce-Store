@@ -1,7 +1,6 @@
-import os
 from pathlib import Path
 
-from dotenv import load_dotenv
+from ecommerce.aws.conf import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -33,6 +32,7 @@ INSTALLED_APPS = [
     'ecommerce.apps.checkout',
     'ecommerce.apps.orders',
     'mptt',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -70,13 +70,14 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# Production DATABASE SQLite3
+# Development DATABASE SQLite3
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
 # Deployment DATABASE PostgreSQL
 DATABASES = {
     'default': {
@@ -133,23 +134,44 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_URL = '/media/'
-# MEDIA_ROOT = BASE_DIR / 'images' / 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles' / 'static'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static")
-]
-if not DEBUG:
-    STATICFILES_DIRS.append(MEDIA_ROOT)
+AWS = True
+
+if AWS:
+    AWS_ACCESS_KEY_ID = os.getenv("ACCESS_KEY")
+    AWS_SECRET_ACCESS_KEY = os.getenv("SECRET_ACCESS_KEY")
+    AWS_STORAGE_BUCKET_NAME = 'django-ecommerce-dokusho'
+    AWS_S3_CUSTOM_DOMAIN = 'django-ecommerce-dokusho.s3.amazonaws.com'
+    AWS_S3_OBJECT_PARAMETERS = {
+        'CacheControl': 'max-age=86400',
+    }
+    AWS_LOCATION = 'static'
+
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static'),
+    ]
+
+    MEDIA_URL = '//%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
+    MEDIA_ROOT = MEDIA_URL
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+else:
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+    STATIC_URL = '/static/'
+    STATIC_ROOT = BASE_DIR / 'staticfiles' / 'static'
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, "static")
+    ]
+    if not DEBUG:
+        STATICFILES_DIRS.append(MEDIA_ROOT)
 
 # Custom user model
 AUTH_USER_MODEL = 'account.Customer'
 LOGIN_REDIRECT_URL = '/account/dashboard'
 LOGIN_URL = '/account/login/'
 
-# Email settings for production
+# Email settings for development
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_HOST = 'localhost'
 # EMAIL_PORT = 25
