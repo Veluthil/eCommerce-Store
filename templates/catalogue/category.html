@@ -22,7 +22,7 @@ Products
         <div class="album">
             {% if not products %}
             <div class="col-12">Currently we have no active products here. Sorry.
-                <a href="{% url 'catalogue:catalogue_home' %}"> Go back to the main page.</a></div>
+                <a class="text-reset" href="{% url 'catalogue:catalogue_home' %}"> Go back to the main page.</a></div>
             {% else %}
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
                 {% for product in products %}
