@@ -145,7 +145,7 @@ if AWS:
         'CacheControl': 'max-age=86400',
     }
     AWS_LOCATION = 'static/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static',)
+    STATIC_ROOT = BASE_DIR / 'staticfiles' / 'static'
     STATICFILES_DIRS = [
         os.path.join(BASE_DIR, 'static'),
     ]
