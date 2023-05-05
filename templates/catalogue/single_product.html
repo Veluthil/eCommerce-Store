@@ -14,7 +14,7 @@ Product
     {% if messages %}
     <div class="alert alert-warning alert-{{ message.tags }}" role="alert">
         {% for message in messages %}
-        {{ message|safe }} <a href="{% url 'account:wishlist' %}">Show your Wish List</a>
+        {{ message|safe }} <a class="text-reset" href="{% url 'account:wishlist' %}">Show your Wish List</a>
         {% endfor %}
     </div>
     {% endif %}
