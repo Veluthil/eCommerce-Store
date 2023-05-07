@@ -32,14 +32,10 @@ Product
                         <label for="select">Qty</label>
                         <select id="select" class="h6 dropdown-select-store">
                             <option value="1">1</option>
-                            {% if not product.category_id == 3 %}
+                            {% if not product.category_id == 4 %}
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
                             {% endif %}
                         </select>
                     </div>
@@ -57,6 +53,7 @@ Product
                 <div class="h-100 p-5 rounded-3 bg-body-tertiary">
                     <h2>Product Description</h2>
                     <p>{{ product.description_detailed }}</p>
+                    <p>{{ product.description_detailed_additional }}</p>
                 </div>
             </div>
         </div>
