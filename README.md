@@ -28,64 +28,54 @@ The frontend is developed using Bootstrap 5, jQuery, and AJAX. The application's
 ## Features
 - User authentication and account management, including email confirmation for account activation
 - Password reset functionality with or without logging in via email
-- Product browsing and searching
+- Product browsing and searching via Categories
 - Wish list for saving favorite products
 - Basket and checkout functionality
 - PayPal payment integration for secure and easy payment processing
 - Multiple shipping addresses for users
 - Toggle between dark and light mode for customizable user experience
 
+Sure, here's an improved version of the installation and usage guide:
+
 ## Installation
 
-1. Clone the repository to your local machine or download and extract in a folder:
+1. Clone the repository to your local machine or download and extract it into a folder:
 ```
 git clone https://github.com/Veluthil/eCommerce-Store.git
 ```
-2. Open in Visual Studio Code or Pycharm.
-
-3. Commands:
+2. Open the project in your preferred code editor and create a virtual environment. Activate the virtual environment using the following commands:
 ```
 py -m venv venv
 venv\Scripts\activate
+```
+3. Install the required packages using: 
+```
 pip install -r requirements.txt
-py manage.py runserver
 ```
-4. In settings.py change each of environmental variables for your own - this includes:
-- load_dotenv("INSERT HERE YOUR OWN PATH TO .ENV FILE"),
-- Django SECRET_KEY,
-- Whole PostgresSQL settings, if you want to use this database, also you can change HOST and PORT to this:
-```
-'HOST': 'localhost',
-'PORT': '5432',
-```
-- AWS_ACCESS_KEY_ID,
-- AWS_SECRET_ACCESS_KEY,
-- EMAIL_HOST_USER,
-- EMAIL_HOST_PASSWORD,
-- PAYPAL_CLIENT_ID,
-- PAYPAL_SECRET,
 
-5. In development mode change this:
-```
-DEBUG = False
+4. Set up the environment variables by updating the `settings.py` file with the appropriate values for the following variables:
+- `load_dotenv("INSERT HERE YOUR OWN PATH TO .ENV FILE")`
+- `SECRET_KEY`
+- `DATABASES`: If you want to use PostgresSQL database, update the `USER`, `PASSWORD`, `HOST`, and `PORT` variables accordingly. Alternatively, you can use SQLite database by commenting out the PostgresSQL settings and uncommenting the SQLite settings.
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+- `EMAIL_HOST_USER`
+- `EMAIL_HOST_PASSWORD`
+- `PAYPAL_CLIENT_ID`
+- `PAYPAL_SECRET`
 
+5. To use the application in development mode, comment out the following lines in the `settings.py` file:
+```
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 ```
-To this:
+And change DEBUG = False to:
 ```
 DEBUG = True
-
-#SECURE_SSL_REDIRECT = True
-#SESSION_COOKIE_SECURE = True
-#CSRF_COOKIE_SECURE = True
 ```
 
-6. You can uncomment SQLite settings and comment out PostgresSQL settings, if you want to use SQLite database (not recommended, if you want to deploy your app).
-
-7. AWS S3 bucket settings are for deployment, you can create your own bucket, or uncomment below settings for local server usage.
-Uncomment this section:
+6. For local server usage, uncomment the following lines in the `settings.py` file:
 ```
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
@@ -94,25 +84,55 @@ STATICFILES_DIRS = [
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 ```
-And comment out AWS S3 Bucket settings.
+And comment out the AWS S3 Bucket settings.
 
-8. Email settings: 
-- for local server usage and sending email to your console uncomment this section:
+7. To set up email functionality, update the `settings.py` file as follows:
+- For local server usage and sending email to your console, uncomment the following lines in settings.py:
 ```
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 25
 ```
-And comment out email settings for SMTP section.
+And comment out the email settings for the SMTP section.
+- Add following method to Customer class in ecommerce/apps/account/models.py:
+```
+ def email_user(self, subject, message):
+        send_mail(
+            subject,
+            message,
+            "l@1.com",
+            [self.email],
+            fail_silently=False,
+        )
+ ```
+ - In acccount_register view at ecommerce/apps/account/views.py comment out following code:
+ ```
+             with get_connection(
+                    host=settings.EMAIL_HOST,
+                    port=settings.EMAIL_PORT,
+                    username=settings.EMAIL_HOST_USER,
+                    password=settings.EMAIL_HOST_PASSWORD,
+                    use_tls=settings.EMAIL_USE_TLS
+            ) as connection:
+                subject = subject
+                email_from = settings.EMAIL_HOST_USER
+                recipient = [user.email]
+                message = message
+                EmailMessage(subject, message, email_from, recipient, connection=connection).send()
+```
+And uncomment this:
+```
+user.email_user(subject=subject, message=message)
+print(message)
+```            
 
-9. For PayPal usage you need to create your own developer account.
+8. To use PayPal, you need to create your own developer account.
 
 ## Usage
 
 1. Open your web browser and navigate to http://localhost:8000/.
-2. Create* your account and/or login.
-2*. Confirm and activate your account by clicking on activation link sent to your email.
+2. Create an account and/or log in. If you create an account, you will receive an activation link by email that you need to click to confirm and activate your account.
 3. Browse the available products and add items to your cart or wish list.
 4. Click the "Checkout Securely" button to enter your payment and shipping information.
-5. Review your orderm choose shipping method, choose PayPal payment methos and submit it for processing.
-6. Edit your Account and Address details (you can add multiple addresses and decide which is the main one).
+5. Review your order, choose a shipping method, select PayPal as your payment method, and submit your order for processing.
+6. Edit your account and address details as necessary (you can add multiple addresses and choose which one is the primary address).
