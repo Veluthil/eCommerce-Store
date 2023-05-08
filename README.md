@@ -23,7 +23,7 @@ The project consists of several Django applications including:
 - Checkout: Payment integration with PayPal
 - Orders: Management of user orders
 
-The frontend is developed using Bootstrap 5, jQuery, and AJAX. The application's database is hosted on Railway and created using PostgresSQL. Static and media files are stored in an AWS S3 Bucket. Tests are written using PyTest.
+The frontend is developed using Bootstrap 5, jQuery, and AJAX. The application's database is hosted on Railway and created using PostgresSQL. Static and media files are stored in an AWS S3 Bucket. Tests are written using PyTest, FactoryBoy and Faker.
 
 ## Features
 - User authentication and account management, including email confirmation for account activation (you will recieve an activation email from dokushovernissage@gmail.com)
