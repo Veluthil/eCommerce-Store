@@ -11,7 +11,104 @@
  ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
  ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
  ![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
+ ![PowerShell](https://img.shields.io/badge/PowerShell-%235391FE.svg?style=for-the-badge&logo=powershell&logoColor=white)
 
-Dokusho Vernissage is an example of eCommerce project that I created in Django. 
+This is a Django-based ecommerce application that allows users to browse and purchase products online. 
 
-This project consists of 
+This project consists of following Django applications: 
+- Account
+- Basket
+- Catalogue
+- Checkout 
+- Orders 
+
+## Installation
+
+1. Clone the repository to your local machine or download and extract in a folder:
+```
+git clone https://github.com/Veluthil/eCommerce-Store.git
+```
+2. Open in Visual Studio Code or Pycharm.
+
+3. Commands:
+```
+py -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+py manage.py runserver
+```
+4. In settings.py change each of environmental variables for your own - this includes:
+- load_dotenv("INSERT HERE YOUR OWN PATH TO .ENV FILE"),
+- Django SECRET_KEY,
+- Whole PostgresSQL settings, if you want to use this database, also you can change HOST and PORT to this:
+```
+'HOST': 'localhost',
+'PORT': '5432',
+```
+- AWS_ACCESS_KEY_ID,
+- AWS_SECRET_ACCESS_KEY,
+- EMAIL_HOST_USER,
+- EMAIL_HOST_PASSWORD,
+- PAYPAL_CLIENT_ID,
+- PAYPAL_SECRET,
+
+5. In development mode change this:
+```
+DEBUG = False
+
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+```
+To this:
+```
+DEBUG = True
+
+#SECURE_SSL_REDIRECT = True
+#SESSION_COOKIE_SECURE = True
+#CSRF_COOKIE_SECURE = True
+```
+
+6. You can uncomment SQLite settings and comment out PostgresSQL settings, if you want to use SQLite database (not recommended, if you want to deploy your app).
+
+7. AWS S3 bucket settings are for deployment, you can create your own bucket, or uncomment below settings for local server usage.
+Uncomment this section:
+```
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+```
+And comment out AWS S3 Bucket settings.
+
+8. Email settings: 
+- for local server usage and sending email to your console uncomment this section:
+```
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 25
+```
+And comment out email settings for SMTP section.
+
+9. For PayPal usage you need to create your own developer account.
+
+## Usage
+
+1. Open your web browser and navigate to http://localhost:8000/.
+2. Create* your account and/or login.
+2*. Confirm and activate your account by clicking on activation link sent to your email.
+3. Browse the available products and add items to your cart or wish list.
+4. Click the "Checkout Securely" button to enter your payment and shipping information.
+5. Review your orderm choose shipping method, choose PayPal payment methos and submit it for processing.
+6. Edit your Account and Address details (you can add multiple addresses and decide which is the main one).
+
+## Features
+
+- User authentication and account management
+- Product browsing and searching
+- Products Wish List
+- Shopping cart and checkout functionality
+- PayPal payment integration
+- Multiple Addresses
