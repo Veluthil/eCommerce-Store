@@ -26,7 +26,7 @@ The project consists of several Django applications including:
 The frontend is developed using Bootstrap 5, jQuery, and AJAX. The application's database is hosted on Railway and created using PostgresSQL. Static and media files are stored in an AWS S3 Bucket. Tests are written using PyTest.
 
 ## Features
-- User authentication and account management, including email confirmation for account activation
+- User authentication and account management, including email confirmation for account activation (you will recieve an activation email from dokushovernissage@gmail.com)
 - Password reset functionality with or without logging in via email
 - Product browsing and searching via Categories
 - Wish list for saving favorite products
@@ -36,6 +36,18 @@ The frontend is developed using Bootstrap 5, jQuery, and AJAX. The application's
 - Toggle between dark and light mode for customizable user experience
 
 Sure, here's an improved version of the installation and usage guide:
+
+## Dokusho Vernissage eCommerce App Preview
+![dv-ss-1](https://user-images.githubusercontent.com/108438343/236901510-dde96cfd-4528-42e1-8315-7597a5dd37af.png)
+![dv-ss-2](https://user-images.githubusercontent.com/108438343/236901542-975e175e-de3c-4a01-83aa-dd4b4ece4233.png)
+![dv-ss-3](https://user-images.githubusercontent.com/108438343/236901641-5f69d267-2515-4b89-8ace-5ddd0f663839.png)
+![dv-ss-4](https://user-images.githubusercontent.com/108438343/236901659-f516155b-74cb-4e95-979f-1379f96241dd.png)
+![dv-ss-5](https://user-images.githubusercontent.com/108438343/236901678-732299a9-e94a-4a5b-8024-13dc5325e4ff.png)
+![dv-ss-6](https://user-images.githubusercontent.com/108438343/236901693-f8a1e5f6-fcaa-444e-b4ba-00f3ed0573c4.png)
+![dv-ss-7](https://user-images.githubusercontent.com/108438343/236901717-9cba09e6-0ed3-4bd4-ade5-93ba3d486f7e.png)
+![dv-ss-8](https://user-images.githubusercontent.com/108438343/236901759-0ef87555-2eaa-4ed9-912d-6c5550e0259c.png)
+![dv-ss-9](https://user-images.githubusercontent.com/108438343/236901780-27c1492d-3b00-4cb1-948a-1e8730a43edb.png)
+
 
 ## Installation
 
