@@ -27,16 +27,15 @@ For the frontend, Bootstrap 5, jQuery, and AJAX were used. The application's dat
 ## Features
 - User authentication and account management, including email confirmation for account activation (you will recieve an activation email from dokushovernissage@gmail.com)
 - Password reset functionality with or without logging in via email
-- Product browsing and searching via Categories
+- Product browsing via Categories
 - Wish list for saving favorite products
 - Basket and checkout functionality
 - PayPal payment integration for secure and easy payment processing
 - Multiple shipping addresses for users
 - Toggle between dark and light mode for customizable user experience
 
-Sure, here's an improved version of the installation and usage guide:
-
 ## Dokusho Vernissage eCommerce App Preview
+
 ![dv-ss-1](https://user-images.githubusercontent.com/108438343/236901510-dde96cfd-4528-42e1-8315-7597a5dd37af.png)
 ![dv-ss-2](https://user-images.githubusercontent.com/108438343/236901542-975e175e-de3c-4a01-83aa-dd4b4ece4233.png)
 ![dv-ss-3](https://user-images.githubusercontent.com/108438343/236901641-5f69d267-2515-4b89-8ace-5ddd0f663839.png)
