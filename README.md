@@ -76,7 +76,7 @@ pip install -r requirements.txt
 - `PAYPAL_CLIENT_ID`
 - `PAYPAL_SECRET`
 
-5. To use the application in development mode, comment out the following lines in the `settings.py` file:
+5. To use the application in development mode, comment out the following lines or change to `False` in the `settings.py` file:
 ```
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
