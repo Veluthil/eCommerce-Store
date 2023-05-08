@@ -1,4 +1,4 @@
-# Dokusho Vernissage
+# Dokusho Vernissage eCommerce App
  ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
  ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
  ![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
@@ -13,14 +13,27 @@
  ![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
  ![PowerShell](https://img.shields.io/badge/PowerShell-%235391FE.svg?style=for-the-badge&logo=powershell&logoColor=white)
 
-This is a Django-based ecommerce application that allows users to browse and purchase products online. 
+Dokusho Vernissage eCommerce is a Django-based web application that allows users to browse and purchase products online. The application is deployed on Vercel at https://dokusho-vernissage.vercel.app/.
 
-This project consists of following Django applications: 
-- Account
-- Basket
-- Catalogue
-- Checkout 
-- Orders 
+The project consists of several Django applications including:
+
+- Account: User authentication and account management
+- Basket: Basket and checkout functionality
+- Catalogue: Product browsing and searching
+- Checkout: Payment integration with PayPal
+- Orders: Management of user orders
+
+The frontend is developed using Bootstrap 5, jQuery, and AJAX. The application's database is hosted on Railway and created using PostgresSQL. Static and media files are stored in an AWS S3 Bucket. Tests are written using PyTest.
+
+## Features
+- User authentication and account management, including email confirmation for account activation
+- Password reset functionality with or without logging in via email
+- Product browsing and searching
+- Wish list for saving favorite products
+- Basket and checkout functionality
+- PayPal payment integration for secure and easy payment processing
+- Multiple shipping addresses for users
+- Toggle between dark and light mode for customizable user experience
 
 ## Installation
 
@@ -103,12 +116,3 @@ And comment out email settings for SMTP section.
 4. Click the "Checkout Securely" button to enter your payment and shipping information.
 5. Review your orderm choose shipping method, choose PayPal payment methos and submit it for processing.
 6. Edit your Account and Address details (you can add multiple addresses and decide which is the main one).
-
-## Features
-
-- User authentication and account management
-- Product browsing and searching
-- Products Wish List
-- Shopping cart and checkout functionality
-- PayPal payment integration
-- Multiple Addresses
