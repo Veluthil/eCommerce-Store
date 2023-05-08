@@ -62,7 +62,6 @@ class CustomerFactory(factory.django.DjangoModelFactory):
 
     email = "a@a.com"
     name = "user1"
-    mobile = "111111111"
     password = "test"
     is_active = True
     is_staff = False

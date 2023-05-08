@@ -38,7 +38,7 @@ def test_customer_create_address(client, customer):
 
 
 @pytest.mark.parametrize(
-    "user_name, email, password, password2, validity",
+    "name, email, password, password2, validity",
     [
         ("user1", "a@a.com", "test123", "test123", True),
         ("user1", "a@a.com", "test123", "", False),
@@ -48,10 +48,10 @@ def test_customer_create_address(client, customer):
     ]
 )
 @pytest.mark.django_db
-def test_create_account(user_name, email, password, password2, validity):
+def test_create_account(name, email, password, password2, validity):
     form = RegistrationForm(
         data={
-            "user_name": user_name,
+            "name": name,
             "email": email,
             "password": password,
             "password2": password2,
@@ -61,7 +61,7 @@ def test_create_account(user_name, email, password, password2, validity):
 
 
 @pytest.mark.parametrize(
-    "user_name, email, password, password2, validity",
+    "name, email, password, password2, validity",
     [
         ("user1", "a@a.com", "test123", "test123", 200),
         # ("user1", "a@a.com", "test123", "test", 400),
@@ -69,11 +69,11 @@ def test_create_account(user_name, email, password, password2, validity):
     ]
 )
 @pytest.mark.django_db
-def test_create_account_view(client, user_name, email, password, password2, validity):
+def test_create_account_view(client, name, email, password, password2, validity):
     response = client.post(
         "/account/register/",
         data={
-            "user_name": user_name,
+            "name": name,
             "email": email,
             "password": password,
             "password2": password2,
