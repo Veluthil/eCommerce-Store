@@ -1,8 +1,10 @@
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login, logout
+from django.contrib.auth.password_validation import validate_password
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ValidationError
 from django.core.mail import get_connection, EmailMessage
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
@@ -34,7 +36,15 @@ def account_register(request):
             user = register_form.save(commit=False)
             user.email = register_form.cleaned_data["email"]
             user.name = register_form.cleaned_data["name"]
-            user.set_password(register_form.cleaned_data["password"])
+            user.password = register_form.cleaned_data["password"]
+            try:
+                validate_password(user.password)
+            except ValidationError as e:
+                error_message = e.messages[0]
+                register_form = RegistrationForm()
+                return render(request, "account/registration/register.html", {"error_message": error_message,
+                                                                              "form": register_form})
+            user.set_password(user.password)
             user.is_active = False
             user.save()
             current_site = get_current_site(request)
