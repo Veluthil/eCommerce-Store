@@ -44,11 +44,15 @@
                         <ul class="dropdown-menu rounded-0 border-0" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="{% url 'catalogue:catalogue_home' %}">All</a></li>
                             {% for cat in categories %}
-
+                            {% if cat.level == 1 %}
                             <li class="selected">
+                                <a class="dropdown-item" href="{{ cat.get_absolute_url }}"> - {{ cat.name|title }}</a>
+                            </li>
+                            {% else %}
+                            <li class="selected fw500">
                                 <a class="dropdown-item" href="{{ cat.get_absolute_url }}">{{ cat.name|title }}</a>
                             </li>
-
+                            {% endif %}
                             {% endfor %}
                         </ul>
                     </li>
@@ -168,11 +172,17 @@
                                         <li><a class="dropdown-item" href="{% url 'catalogue:catalogue_home' %}">All</a>
                                         </li>
                                         {% for cat in categories %}
-
+                                        {% if cat.level == 1 %}
                                         <li class="selected">
-                                            <a class="dropdown-item" href="{{ cat.get_absolute_url }}">{{ cat.name|title }}</a>
+                                            <a class="dropdown-item" href="{{ cat.get_absolute_url }}">
+                                                - {{ cat.name|title }}</a>
                                         </li>
-
+                                        {% else %}
+                                        <li class="selected">
+                                            <a class="dropdown-item" href="{{ cat.get_absolute_url }}">
+                                                {{ cat.name|title }}</a>
+                                        </li>
+                                        {% endif %}
                                         {% endfor %}
                                     </ul>
                                 </li>
@@ -325,6 +335,5 @@ $(document).ready(function() {
     });
   });
 });
-
 
 </script>
