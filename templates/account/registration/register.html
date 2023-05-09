@@ -20,6 +20,11 @@ Register
     {% endif %}
     {% endfor %}
     {% endif %}
+    {% if error_message %}
+    <div class="alert alert-danger" role="alert">
+        {{ error_message }}
+    </div>
+    {% endif %}
 
     <label>{{ form.name.label }}<span class="text-muted small">(Required)</span></label>
     {{ form.name }}
@@ -27,7 +32,7 @@ Register
     {{ form.email }}
     <label>{{ form.password.label}}<span class="text-muted mb-4"></span></label>
     <small class="form-text text-muted mb-4 small">
-        At least 8 characters and 1 digit
+        At least 9 characters
     </small>
     {{ form.password }}
     <label>{{ form.password2.label}}<span class="text-muted small">(Required)</span></label>
