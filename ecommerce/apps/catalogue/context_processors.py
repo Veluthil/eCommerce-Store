@@ -2,4 +2,4 @@ from .models import Category
 
 
 def categories(request):
-    return {"categories": Category.objects.filter(level=0)}
+    return {"categories": Category.objects.all()}
