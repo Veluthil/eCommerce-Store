@@ -13,11 +13,11 @@ load_dotenv("D:/Programming/PythonEnV/.env.txt")
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = True
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
 
 ALLOWED_HOSTS = ['yourdomain.com', '127.0.0.1', 'localhost', '.vercel.app', '.now.sh']
 
@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'URL': os.getenv("POSTGRES_URL"),
+
         'NAME': os.getenv("POSTGRES_NAME"),
         'USER': os.getenv("POSTGRES_USER"),
         'PASSWORD': os.getenv("POSTGRES_PASSWORD"),
