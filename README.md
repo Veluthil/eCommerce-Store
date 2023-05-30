@@ -45,9 +45,8 @@ For the frontend, Bootstrap 5, jQuery, and AJAX were used. The application's dat
 ![dv-ss-7](https://user-images.githubusercontent.com/108438343/236901717-9cba09e6-0ed3-4bd4-ade5-93ba3d486f7e.png)
 ![dv-ss-8](https://user-images.githubusercontent.com/108438343/236901759-0ef87555-2eaa-4ed9-912d-6c5550e0259c.png)
 ![dv-ss-9](https://user-images.githubusercontent.com/108438343/236901780-27c1492d-3b00-4cb1-948a-1e8730a43edb.png)
----
-Admin Page
----
+----
+> Admin Page
 ![dv-ss-10](https://user-images.githubusercontent.com/108438343/236928457-e978e9b6-5488-4dfd-85bc-55468ae26a4f.png)
 ![dv-ss-11](https://user-images.githubusercontent.com/108438343/236928472-a57ebe37-94c6-4391-a6d3-2401db187f6d.png)
 ![dv-ss-12](https://user-images.githubusercontent.com/108438343/236928495-9be241e9-c0f1-40d2-be47-823eb1b92cab.png)
