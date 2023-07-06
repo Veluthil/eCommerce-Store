@@ -13,7 +13,7 @@
  ![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
  ![PowerShell](https://img.shields.io/badge/PowerShell-%235391FE.svg?style=for-the-badge&logo=powershell&logoColor=white)
 
-Dokusho Vernissage eCommerce is a Django-based web application that allows users to browse and purchase products online. The application is deployed on Vercel at https://dokusho-vernissage.vercel.app/.
+Dokusho Vernissage eCommerce is a Django-based web application that allows users to browse and purchase products online. The application is deployed on Vercel at https://dokusho-vernissage.vercel.app/. To further enhance the project, I am actively working on containerization using Docker, which will improve the application's scalability and portability, so stay tuned! 
 
 The project is composed of several Django applications, including:
 - **Account** for user authentication and account management (passwords and addresses), 
